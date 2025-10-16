@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Logo & Description */}
           <div className="md:col-span-1">
             <img
-              src="/placeholder.svg?key=efx3h"
+              src="/Nee Solar Logo 1.png"
               alt="NEESSOLAR"
               className="h-16 mb-4"
             />
@@ -148,7 +148,7 @@ export default function Footer() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <img
-                src="/placeholder.svg?key=29e82"
+                src="/Nee Solar Logo 1.png"
                 alt="Visa"
                 className="h-6"
               />
