@@ -1,6 +1,34 @@
+'use client'
+
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useCart } from '../context/CartContext'
+import { getImageUrl } from '../services/api'
 
 export default function CheckoutPage() {
+  const { cartItems, getCartTotal } = useCart()
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    company: '',
+    country: 'Nigeria',
+    address: '',
+    apartment: '',
+    city: '',
+    state: '',
+    postcode: '',
+    email: '',
+    phone: '',
+    paymentMethod: 'bank'
+  })
+
+  const subtotal = getCartTotal()
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
   return (
     <div className="bg-gray-50">
       {/* Breadcrumb */}
@@ -15,8 +43,8 @@ export default function CheckoutPage() {
           {/* Checkout Form */}
           <div className="lg:col-span-2">
             {/* Billing Details */}
-            <div className="bg-white rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <div className="bg-white rounded-lg p-4 md:p-6 mb-6">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">
                 Billing details
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -26,6 +54,9 @@ export default function CheckoutPage() {
                   </label>
                   <input
                     type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
                     placeholder="First name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
@@ -36,6 +67,9 @@ export default function CheckoutPage() {
                   </label>
                   <input
                     type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
                     placeholder="Last name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
@@ -48,6 +82,9 @@ export default function CheckoutPage() {
                 </label>
                 <input
                   type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleInputChange}
                   placeholder="Company name"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
@@ -57,7 +94,12 @@ export default function CheckoutPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Country
                 </label>
-                <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <select
+                  name="country"
+                  value={formData.country}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                >
                   <option>Select a country</option>
                   <option>Nigeria</option>
                   <option>USA</option>
@@ -71,6 +113,9 @@ export default function CheckoutPage() {
                 </label>
                 <input
                   type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
                   placeholder="Street address"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
@@ -82,6 +127,9 @@ export default function CheckoutPage() {
                 </label>
                 <input
                   type="text"
+                  name="apartment"
+                  value={formData.apartment}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -92,6 +140,9 @@ export default function CheckoutPage() {
                 </label>
                 <input
                   type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -102,6 +153,9 @@ export default function CheckoutPage() {
                 </label>
                 <input
                   type="text"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -112,6 +166,9 @@ export default function CheckoutPage() {
                 </label>
                 <input
                   type="text"
+                  name="postcode"
+                  value={formData.postcode}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -123,6 +180,9 @@ export default function CheckoutPage() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="Email address"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
@@ -133,6 +193,9 @@ export default function CheckoutPage() {
                   </label>
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     placeholder="Phone number"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
@@ -141,8 +204,8 @@ export default function CheckoutPage() {
             </div>
 
             {/* Shipping Details */}
-            <div className="bg-white rounded-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <div className="bg-white rounded-lg p-4 md:p-6">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">
                 Shipping details
               </h2>
               <p className="text-gray-600">
@@ -153,47 +216,31 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg p-6 sticky top-4">
+            <div className="bg-white rounded-lg p-4 md:p-6 lg:sticky lg:top-4">
               <h3 className="font-semibold text-gray-900 mb-4">
-                In your cart (2)
+                In your cart ({cartItems.length})
               </h3>
-              <div className="space-y-4 mb-6">
-                <div className="flex gap-4">
-                  <img
-                    src="/placeholder.svg?height=80&width=80"
-                    alt="Product"
-                    className="w-20 h-20 object-contain bg-gray-50 rounded-lg"
-                  />
-                  <div className="flex-grow">
-                    <h4 className="font-medium text-gray-900 text-sm">
-                      Solar Street Light
-                    </h4>
-                    <p className="text-xs text-gray-600">
-                      Product code: CA700315418
-                    </p>
-                    <p className="text-emerald-600 font-semibold text-sm mt-1">
-                      2 X ₦11.00
-                    </p>
+              <div className="space-y-4 mb-6 max-h-64 overflow-y-auto">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="flex gap-4">
+                    <img
+                      src={getImageUrl(item.thumbnail) || '/placeholder.svg'}
+                      alt={item.name}
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain bg-gray-50 rounded-lg"
+                    />
+                    <div className="flex-grow">
+                      <h4 className="font-medium text-gray-900 text-sm">
+                        {item.name}
+                      </h4>
+                      <p className="text-xs text-gray-600">
+                        Product code: {item.id}
+                      </p>
+                      <p className="text-emerald-600 font-semibold text-sm mt-1">
+                        {item.quantity} X ₦{Number(item.price).toFixed(2)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <img
-                    src="/placeholder.svg?height=80&width=80"
-                    alt="Product"
-                    className="w-20 h-20 object-contain bg-gray-50 rounded-lg"
-                  />
-                  <div className="flex-grow">
-                    <h4 className="font-medium text-gray-900 text-sm">
-                      Solar Street Light
-                    </h4>
-                    <p className="text-xs text-gray-600">
-                      Product code: CA700315418
-                    </p>
-                    <p className="text-emerald-600 font-semibold text-sm mt-1">
-                      2 X ₦11.00
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
 
               <div className="border-t pt-4">
@@ -203,17 +250,18 @@ export default function CheckoutPage() {
                     <span>Product:</span>
                     <span>Total</span>
                   </div>
-                  <div className="flex justify-between text-gray-700">
-                    <span>Candy nut chocolate</span>
-                    <span>₦84.00</span>
-                  </div>
-                  <div className="flex justify-between text-gray-700">
-                    <span>A bakery doughnutes</span>
-                    <span>₦84.00</span>
-                  </div>
+                  {cartItems.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex justify-between text-gray-700 text-sm"
+                    >
+                      <span className="truncate mr-2">{item.name}</span>
+                      <span>₦{(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                  ))}
                   <div className="flex justify-between text-gray-700 pt-3 border-t">
                     <span>Subtotal</span>
-                    <span>₦128.00</span>
+                    <span>₦{subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-gray-700">
                     <span>Shipping Charge</span>
@@ -221,7 +269,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between font-semibold text-lg pt-3 border-t">
                     <span>Total</span>
-                    <span>₦128.00</span>
+                    <span>₦{subtotal.toFixed(2)}</span>
                   </div>
                 </div>
 
@@ -229,16 +277,21 @@ export default function CheckoutPage() {
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="radio"
-                      name="payment"
+                      name="paymentMethod"
+                      value="bank"
+                      checked={formData.paymentMethod === 'bank'}
+                      onChange={handleInputChange}
                       className="w-4 h-4 text-emerald-500"
-                      defaultChecked
                     />
                     <span className="text-gray-700">Direct bank transfer</span>
                   </label>
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="radio"
-                      name="payment"
+                      name="paymentMethod"
+                      value="paypal"
+                      checked={formData.paymentMethod === 'paypal'}
+                      onChange={handleInputChange}
                       className="w-4 h-4 text-emerald-500"
                     />
                     <span className="text-gray-700">Paypal</span>
@@ -246,33 +299,36 @@ export default function CheckoutPage() {
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="radio"
-                      name="payment"
+                      name="paymentMethod"
+                      value="cash"
+                      checked={formData.paymentMethod === 'cash'}
+                      onChange={handleInputChange}
                       className="w-4 h-4 text-emerald-500"
                     />
                     <span className="text-gray-700">Cash on hand</span>
                   </label>
                 </div>
 
-                <div className="flex gap-2 mb-6">
+                <div className="flex gap-2 mb-6 justify-center">
                   <img
                     src="/visa-application-process.png"
                     alt="Visa"
-                    className="h-6"
+                    className="h-5 md:h-6"
                   />
                   <img
                     src="/mastercard-logo-abstract.png"
                     alt="Mastercard"
-                    className="h-6"
+                    className="h-5 md:h-6"
                   />
                   <img
                     src="/paypal-digital-payment.png"
                     alt="PayPal"
-                    className="h-6"
+                    className="h-5 md:h-6"
                   />
                   <img
                     src="/discovery-path.png"
                     alt="Discover"
-                    className="h-6"
+                    className="h-5 md:h-6"
                   />
                 </div>
 

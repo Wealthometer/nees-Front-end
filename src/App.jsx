@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
@@ -9,25 +9,28 @@ import CheckoutPage from './pages/CheckoutPage'
 import OrderCompletePage from './pages/OrderCompletePage'
 import ContactPage from './pages/ContactPage'
 import AboutPage from './pages/AboutPage'
+import { CartProvider } from './context/CartContext'
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductPage />} />
-          <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/order-complete" element={<OrderCompletePage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <CartProvider>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<ProductPage />} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-complete" element={<OrderCompletePage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </CartProvider>
   )
 }
 
