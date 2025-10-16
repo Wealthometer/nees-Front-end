@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @theme inline {
   --color-emerald-50: #ecfdf5;
   --color-emerald-100: #d1fae5;
@@ -19,6 +20,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Added overflow-x hidden to prevent horizontal scrolling */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {

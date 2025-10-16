@@ -1,14 +1,49 @@
+'use client'
+
 import { Link } from 'react-router-dom'
-import { Star } from 'lucide-react'
+import { Star, Heart } from 'lucide-react'
 import { getImageUrl } from '../services/api'
+import { useWishlist } from '../context/WishlistContext'
+import { useCart } from '../context/CartContext'
 
 export default function ProductCard({ product }) {
   const imageUrl = getImageUrl(
     product.thumbnail || (product.images && product.images[0])
   )
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
+  const { addToCart } = useCart()
+  const inWishlist = isInWishlist(product.id)
+
+  const handleWishlistToggle = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (inWishlist) {
+      removeFromWishlist(product.id)
+    } else {
+      addToWishlist(product)
+    }
+  }
+
+  const handleAddToCart = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    addToCart(product, 1)
+  }
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow group">
+    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow group relative">
+      <button
+        onClick={handleWishlistToggle}
+        className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-50 transition-colors"
+        title={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+      >
+        <Heart
+          className={`w-5 h-5 ${
+            inWishlist ? 'fill-red-500 text-red-500' : 'text-gray-600'
+          }`}
+        />
+      </button>
+
       <Link to={`/product/${product.id}`} className="block p-6">
         <div className="aspect-square mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
           <img
@@ -31,7 +66,10 @@ export default function ProductCard({ product }) {
         </div>
       </Link>
       <div className="px-6 pb-6">
-        <button className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 font-medium transition-colors">
+        <button
+          onClick={handleAddToCart}
+          className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 font-medium transition-colors"
+        >
           Add to cart
         </button>
       </div>

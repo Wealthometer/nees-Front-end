@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom'
 import { Search, Heart, ShoppingCart, ChevronDown, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { getCartCount } = useCart()
+  const { getWishlistCount } = useWishlist()
 
   return (
-    <header className="bg-white">
+    <header className="bg-white max-w-full overflow-x-hidden">
       {/* Top bar */}
       <div className="bg-gray-100 py-2 px-4 text-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
@@ -136,10 +138,18 @@ export default function Header() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <button className="hidden lg:flex items-center gap-2 py-3 hover:text-emerald-100">
+              <Link
+                to="/wishlist"
+                className="hidden lg:flex items-center gap-2 py-3 hover:text-emerald-100"
+              >
                 <Heart className="w-5 h-5" />
                 <span>My wishlist</span>
-              </button>
+                {getWishlistCount() > 0 && (
+                  <span className="bg-white text-emerald-500 px-2 py-0.5 rounded text-sm font-semibold">
+                    {getWishlistCount()}
+                  </span>
+                )}
+              </Link>
               <Link
                 to="/cart"
                 className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-gray-800 rounded hover:bg-gray-900"
@@ -182,6 +192,14 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 CONTACT
+              </Link>
+              <Link
+                to="/wishlist"
+                className="flex items-center gap-2 py-2 hover:text-emerald-100"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Heart className="w-5 h-5" />
+                <span>My wishlist ({getWishlistCount()})</span>
               </Link>
               <Link
                 to="/cart"

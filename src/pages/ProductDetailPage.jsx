@@ -14,11 +14,13 @@ import {
 import ProductCard from '../components/ProductCard'
 import { productsAPI, getImageUrl } from '../services/api'
 import { useCart } from '../context/CartContext'
+import { useWishlist } from '../context/WishlistContext'
 
 export default function ProductDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { addToCart } = useCart()
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
   const [product, setProduct] = useState(null)
   const [relatedProducts, setRelatedProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -82,6 +84,16 @@ export default function ProductDetailPage() {
     product.images && product.images.length > 0
       ? product.images.map((img) => getImageUrl(img))
       : [getImageUrl(product.thumbnail)]
+
+  const inWishlist = isInWishlist(product.id)
+
+  const handleWishlistToggle = () => {
+    if (inWishlist) {
+      removeFromWishlist(product.id)
+    } else {
+      addToWishlist(product)
+    }
+  }
 
   return (
     <div className="bg-gray-50">
@@ -213,9 +225,18 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            <button className="w-full border border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 flex items-center justify-center gap-2 transition-colors">
-              <Heart className="w-5 h-5" />
-              WISHLIST
+            <button
+              onClick={handleWishlistToggle}
+              className={`w-full border py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors ${
+                inWishlist
+                  ? 'border-red-500 bg-red-50 text-red-600 hover:bg-red-100'
+                  : 'border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              <Heart
+                className={`w-5 h-5 ${inWishlist ? 'fill-red-500' : ''}`}
+              />
+              {inWishlist ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
             </button>
 
             <div className="mt-8 pt-8 border-t">
