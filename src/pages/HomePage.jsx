@@ -235,7 +235,7 @@ export default function HomePage() {
         <div className="bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-2xl p-12 text-white">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             <img
-              src="/indoor-ac-white.jpg"
+              src="/img_3-removebg-preview.png"
               alt="Deal Product"
               className="mx-auto"
             />
@@ -259,7 +259,7 @@ export default function HomePage() {
               </div>
             </div>
             <img
-              src="/indoor-ac-white.jpg"
+              src="/img_4-removebg-preview.png"
               alt="Deal Product"
               className="mx-auto"
             />
@@ -285,7 +285,7 @@ export default function HomePage() {
             >
               <div className="flex items-center gap-4 mb-4">
                 <img
-                  src={`/customer-.jpg?height=60&width=60&query=customer-${review}`}
+                  src={`/test-2.png?height=60&width=60&query=customer-${review}`}
                   alt="Customer"
                   className="w-16 h-16 rounded-full"
                 />
@@ -294,7 +294,7 @@ export default function HomePage() {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                        className="w-4 h-4 fill-green-400 text-green-400"
                       />
                     ))}
                   </div>
@@ -354,7 +354,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900">
-            Follow on instagram
+            Follow on Instagram
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
@@ -364,7 +364,7 @@ export default function HomePage() {
               className="aspect-square rounded-lg overflow-hidden"
             >
               <img
-                src={`/instagram-.jpg?height=200&width=200&query=instagram-${item}`}
+                src={`/instagram-items (${item}).png`}
                 alt={`Instagram ${item}`}
                 className="w-full h-full object-cover hover:scale-110 transition-transform"
               />

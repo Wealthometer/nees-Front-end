@@ -45,7 +45,7 @@ export default function ProductPage() {
       {/* Breadcrumb */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
-          <p className="text-sm">Home / Collection</p>
+          <p className="text-sm">Home / Collection</p>quite
         </div>
       </div>
 
