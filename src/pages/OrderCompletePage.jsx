@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useCart } from '../context/CartContext'
 
 export default function OrderCompletePage() {
-  const { getCartTotal, clearCart } = useCart()
+  const { getCartTotal } = useCart()
   const [orderTotal] = useState(getCartTotal())
   const [orderNumber] = useState(Math.floor(Math.random() * 10000))
   const [orderDate] = useState(new Date().toLocaleString())
