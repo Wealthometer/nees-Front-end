@@ -12,28 +12,28 @@ export default function AboutPage() {
     {
       name: 'Johnny walker',
       role: 'Web designer',
-      image: '/placeholder.svg?height=300&width=300',
+      image: '/team-1.png',
       description:
         'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
       name: 'Rebecca flex',
       role: 'Support staff',
-      image: '/placeholder.svg?height=300&width=300',
+      image: '/team-3.png',
       description:
         'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
       name: 'Jan ringo',
       role: 'Deputy sale',
-      image: '/placeholder.svg?height=300&width=300',
+      image: '/team-2.png',
       description:
         'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
       name: 'Ringo kai',
       role: 'Policy member',
-      image: '/placeholder.svg?height=300&width=300',
+      image: '/team-4.png',
       description:
         'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     }
@@ -54,7 +54,7 @@ export default function AboutPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-8">About us</h1>
           <div className="bg-white rounded-lg overflow-hidden">
             <img
-              src="/placeholder.svg?height=400&width=1200"
+              src="/about-us-3.png"
               alt="About NEESSOLAR"
               className="w-full h-96 object-cover"
             />

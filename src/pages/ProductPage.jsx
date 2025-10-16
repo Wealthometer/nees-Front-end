@@ -225,7 +225,7 @@ export default function ProductPage() {
               {/* Featured Banner */}
               <div className="mt-8 bg-gradient-to-br from-purple-500 to-yellow-400 rounded-lg p-6 text-white text-center">
                 <img
-                  src="/placeholder.svg?height=150&width=150"
+                  src="/productb.png"
                   alt="Featured"
                   className="mx-auto mb-4"
                 />

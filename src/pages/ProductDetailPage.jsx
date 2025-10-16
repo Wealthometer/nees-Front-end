@@ -14,13 +14,11 @@ import {
 import ProductCard from '../components/ProductCard'
 import { productsAPI, getImageUrl } from '../services/api'
 import { useCart } from '../context/CartContext'
-import { useWishlist } from '../context/WishlistContext'
 
 export default function ProductDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { addToCart } = useCart()
-  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
   const [product, setProduct] = useState(null)
   const [relatedProducts, setRelatedProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -33,7 +31,6 @@ export default function ProductDetailPage() {
         const productData = await productsAPI.getById(id)
         setProduct(productData)
 
-        // Fetch all products for related items
         const allProducts = await productsAPI.getAll()
         const related = allProducts
           .filter(
@@ -85,19 +82,8 @@ export default function ProductDetailPage() {
       ? product.images.map((img) => getImageUrl(img))
       : [getImageUrl(product.thumbnail)]
 
-  const inWishlist = isInWishlist(product.id)
-
-  const handleWishlistToggle = () => {
-    if (inWishlist) {
-      removeFromWishlist(product.id)
-    } else {
-      addToWishlist(product)
-    }
-  }
-
   return (
     <div className="bg-gray-50">
-      {/* Breadcrumb */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-sm">
@@ -108,7 +94,6 @@ export default function ProductDetailPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-          {/* Product Images */}
           <div>
             <div className="bg-white rounded-lg p-4 md:p-8 mb-4">
               <img
@@ -140,7 +125,6 @@ export default function ProductDetailPage() {
             )}
           </div>
 
-          {/* Product Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="flex gap-1">
@@ -181,7 +165,7 @@ export default function ProductDetailPage() {
               <div className="mb-6">
                 <p className="font-semibold text-gray-900 mb-2">Description:</p>
                 <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                  {product.description}
+                  {product.description.replace(/<[^>]+>/g, '')}
                 </p>
               </div>
             )}
@@ -225,18 +209,9 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            <button
-              onClick={handleWishlistToggle}
-              className={`w-full border py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors ${
-                inWishlist
-                  ? 'border-red-500 bg-red-50 text-red-600 hover:bg-red-100'
-                  : 'border-gray-300 hover:bg-gray-50'
-              }`}
-            >
-              <Heart
-                className={`w-5 h-5 ${inWishlist ? 'fill-red-500' : ''}`}
-              />
-              {inWishlist ? 'REMOVE FROM WISHLIST' : 'ADD TO WISHLIST'}
+            <button className="w-full border border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 flex items-center justify-center gap-2 transition-colors">
+              <Heart className="w-5 h-5" />
+              WISHLIST
             </button>
 
             <div className="mt-8 pt-8 border-t">
@@ -298,7 +273,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        {/* Related Products */}
         {relatedProducts.length > 0 && (
           <section className="py-16">
             <div className="text-center mb-12">
