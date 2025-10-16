@@ -42,7 +42,7 @@ export default function Header() {
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
               <img
-                src="/neessolar-logo.jpg"
+                src="/Nee Solar Logo 1.png"
                 alt="NEESSOLAR"
                 className="h-8 md:h-12"
               />

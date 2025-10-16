@@ -62,7 +62,7 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <img
-                src="/solar-panel-angled.jpg"
+                src="/a high quality image 1.png"
                 alt="Solar Panel"
                 className="w-full max-w-md ml-auto transform rotate-12"
               />
@@ -115,7 +115,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl p-8 text-white relative overflow-hidden">
             <img
-              src="/indoor-ac-unit.jpg"
+              src="/img 1.png"
               alt="Indoor AC Unit"
               className="absolute right-0 bottom-0 w-48 h-48 object-contain"
             />
@@ -131,7 +131,7 @@ export default function HomePage() {
           </div>
           <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 text-white relative overflow-hidden">
             <img
-              src="/solar-inverter.jpg"
+              src="/img 2.png"
               alt="Solar Inverters"
               className="absolute right-0 bottom-0 w-48 h-48 object-contain"
             />
@@ -147,7 +147,7 @@ export default function HomePage() {
           </div>
           <div className="bg-gradient-to-br from-red-400 to-red-500 rounded-2xl p-8 text-white relative overflow-hidden">
             <img
-              src="/outdoor-ac.jpg"
+              src="/img 3.png"
               alt="Outdoor AC Unit"
               className="absolute right-0 bottom-0 w-48 h-48 object-contain"
             />
@@ -169,18 +169,22 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {[
             {
-              icon: '🚚',
+              icon: <img src="/service-1.png" alt="" />,
               title: 'Nationwide shipping',
               desc: 'We ship all over Nigeria'
             },
             {
-              icon: '💳',
+              icon: <img src="service-2.png" alt="" />,
               title: 'Secured payment',
               desc: 'Safe & secure checkout'
             },
-            { icon: '↩️', title: 'Money-back', desc: '30 days money back' },
             {
-              icon: '🎧',
+              icon: <img src="service-3.png" alt="" />,
+              title: 'Money-back',
+              desc: '30 days money back'
+            },
+            {
+              icon: <img src="service-4.png" alt="" />,
               title: 'Best gift voucher',
               desc: 'Best offers & promotions'
             }
@@ -298,12 +302,12 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="text-gray-700 leading-relaxed">
-                If you haven't tried NEES solar, you're missing out. Their
+                If you haven‘t tried NEES solar, you‘re missing out. Their
                 products are top-notch and the customer service is exceptional.
-                I'm a customer for life!
+                I‘m a customer for life!
               </p>
               <div className="mt-4 flex items-center gap-2">
-                <span className="text-2xl text-emerald-500">"</span>
+                <span className="text-2xl text-emerald-500">¨</span>
                 <span className="font-semibold text-gray-900">Recommended</span>
               </div>
             </div>
