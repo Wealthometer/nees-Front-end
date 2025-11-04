@@ -165,7 +165,7 @@ export default function Footer() {
         {/* Newsletter */}
         <div className="mt-12 pt-8 border-t">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               <img src="/Nee Solar Logo 1.png" alt="Visa" className="h-6" />
               <img
                 src="/placeholder.svg?key=cqgny"
@@ -182,7 +182,7 @@ export default function Footer() {
                 alt="Discover"
                 className="h-6"
               />
-            </div>
+            </div> */}
             <div className="flex items-center gap-4">
               <span className="font-semibold text-gray-900">
                 Subscribe newsletter
