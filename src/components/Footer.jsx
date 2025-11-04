@@ -4,18 +4,37 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t mt-16">
       {/* Brand logos */}
-      <div className="bg-emerald-500 py-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-around text-white text-2xl font-bold opacity-80">
-            <span>Samsung</span>
-            <span>SONY</span>
-            <span>LG</span>
-            <span>SONY</span>
-            <span>Panasonic</span>
-            <span>Toshiba</span>
-          </div>
-        </div>
-      </div>
+     <div className="bg-emerald-500 py-8 overflow-hidden relative">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="flex animate-slide whitespace-nowrap space-x-12 text-white text-xl font-semibold opacity-90 tracking-wide">
+      <span>Durability</span>
+      <span>High Performance</span>
+      <span>Energy Efficient</span>
+      <span>Premium Quality</span>
+      <span>Long Warranty</span>
+      <span>Top Reliability</span>
+      {/* Repeat to make it seamless */}
+      <span>Durability</span>
+      <span>High Performance</span>
+      <span>Energy Efficient</span>
+      <span>Premium Quality</span>
+      <span>Long Warranty</span>
+      <span>Top Reliability</span>
+    </div>
+  </div>
+</div>
+
+<style jsx>{`
+  @keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-slide {
+    display: inline-flex;
+    animation: slide 15s linear infinite;
+  }
+`}</style>
+
 
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 py-12">
@@ -147,11 +166,7 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img
-                src="/Nee Solar Logo 1.png"
-                alt="Visa"
-                className="h-6"
-              />
+              <img src="/Nee Solar Logo 1.png" alt="Visa" className="h-6" />
               <img
                 src="/placeholder.svg?key=cqgny"
                 alt="Mastercard"

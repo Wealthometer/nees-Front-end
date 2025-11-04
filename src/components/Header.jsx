@@ -101,7 +101,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="hidden md:flex items-center justify-between">
             <div className="flex items-center">
-              <button
+              {/* <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="flex items-center gap-2 px-4 py-3 bg-emerald-600 hover:bg-emerald-700"
               >
@@ -109,7 +109,7 @@ export default function Header() {
                 <span className="hidden lg:inline">TRENDING CATEGORY</span>
                 <span className="lg:hidden">MENU</span>
                 <ChevronDown className="w-4 h-4" />
-              </button>
+              </button> */}
               <div className="flex gap-4 lg:gap-8 ml-4 lg:ml-8">
                 <Link
                   to="/"
