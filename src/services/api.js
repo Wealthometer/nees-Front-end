@@ -1,5 +1,5 @@
 const API_BASE_URL = 'https://nees-1.onrender.com/api'
-
+const RENDER_BASE_URL = 'https://nees-1.onrender.com'
 // Helper function to handle API responses
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -130,7 +130,10 @@ export const adminAPI = {
 
 // Helper to get image URL
 export const getImageUrl = (imagePath) => {
-  if (!imagePath) return '/placeholder.svg?height=400&width=400'
-  if (imagePath.startsWith('http')) return imagePath
-  return `http://localhost:5000${imagePath}`
+  if (!imagePath) return '/placeholder.svg?height=400&width=400'
+  if (imagePath.startsWith('http')) return imagePath
+  
+  // FIX: Use the secure Render domain instead of localhost
+  // Example: https://nees-1.onrender.com + /uploads/image.jpg
+  return `${RENDER_BASE_URL}${imagePath}` 
 }
