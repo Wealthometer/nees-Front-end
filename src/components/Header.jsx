@@ -49,7 +49,7 @@ export default function Header() {
             </Link>
 
             <div className="hidden md:flex flex-grow max-w-2xl">
-              <div className="relative w-full">
+              {/* <div className="relative w-full">
                 <input
                   type="text"
                   placeholder="Find our search"
@@ -58,7 +58,7 @@ export default function Header() {
                 <button className="absolute right-0 top-0 h-full px-4 bg-emerald-500 text-white rounded-r-lg hover:bg-emerald-600">
                   <Search className="w-5 h-5" />
                 </button>
-              </div>
+              </div> */}
             </div>
 
             {/* Contact & Cart */}

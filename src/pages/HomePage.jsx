@@ -180,8 +180,8 @@ export default function HomePage() {
             },
             {
               icon: <img src="service-3.png" alt="" />,
-              title: 'Money-back',
-              desc: '30 days money back'
+              title: 'Quality Assurance',
+              desc: 'We ensure every product meets the highest standards.'
             },
             {
               icon: <img src="service-4.png" alt="" />,
