@@ -83,11 +83,11 @@ export default function Header() {
 
           <div className="md:hidden mt-4">
             <div className="relative">
-              <input
+              {/* <input
                 type="text"
                 placeholder="Find our search"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              />
+              /> */}
               {/* <button className="absolute right-0 top-0 h-full px-4 bg-emerald-500 text-white rounded-r-lg hover:bg-emerald-600">
                 <Search className="w-5 h-5" />
               </button> */}
