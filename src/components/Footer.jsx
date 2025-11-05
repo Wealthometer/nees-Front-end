@@ -203,7 +203,8 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t text-center text-gray-600 text-sm">
-          © 2025 Copyright Nees Solar Panel
+          <a target='_blank' href="https://nees-zeta.vercel.app/admin-login.html"> © 2025 Copyright Nees Solar Panel</a>
+         
         </div>
       </div>
     </footer>

@@ -39,26 +39,70 @@ export default function AboutPage() {
     }
   ]
 
+  // Defined the three images for the slider
+  const heroImages = [
+    '/about-us-3.png', // Image 1
+    '/about-us-3.png', // Image 2
+    '/about-us-3.png'  // Image 3
+  ]
+
   return (
     <div className="bg-gray-50">
-      {/* Breadcrumb */}
+      {/* 1. Breadcrumb */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-sm">Home / About us</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        {/* About Us Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">About us</h1>
-          <div className="bg-white rounded-lg overflow-hidden">
+      {/* --- */}
+
+      {/* 2. LEADER/HERO SECTION (Full Width Slider) */}
+      {/* The h-[50vh] and overflow-hidden classes are CRUCIAL for the slider */}
+      <div className="relative text-center mb-16 h-[50vh] overflow-hidden">
+        
+        {/* Title positioned over the image. This stays static. */}
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center p-4 z-10">
+          <h1 className="text-5xl font-extrabold text-white mb-4">
+            About NEES GLOBAL SERVICES
+          </h1>
+          <p className="text-xl text-gray-200">
+            Powering a Sustainably Clean Future
+          </p>
+        </div>
+        
+        {/* Carousel Wrapper - Uses the 'carousel-slide' CSS class */}
+        <div className="carousel-slide h-full">
+          {heroImages.map((src, index) => (
             <img
-              src="/about-us-3.png"
-              alt="About NEESSOLAR"
-              className="w-full h-96 object-cover"
+              key={index}
+              src={src}
+              alt={`NEES Solar Image ${index + 1}`}
+              className="object-cover w-full h-full"
             />
-          </div>
+          ))}
+        </div>
+      </div>
+
+      {/* --- */}
+
+      {/* 3. Main Content Container */}
+      <div className="max-w-7xl mx-auto px-4 py-16 pt-0">
+        
+        {/* About Us Summary */}
+        <div className="text-center mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Our Journey
+          </h2>
+          <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            NEES Global Services stands as a beacon of hope in a world facing
+            escalating energy demands and the urgent call to combat climate
+            change. We are at the forefront of the solar revolution, offering
+            cutting-edge solar devices—from high-efficiency panels to smart
+            fans and air conditioners—that are investments in a brighter, greener
+            tomorrow. We are committed to empowering communities by making clean,
+            affordable energy accessible to everyone.
+          </p>
         </div>
 
         {/* Mission & Vision */}
@@ -68,11 +112,12 @@ export default function AboutPage() {
               <Users className="w-10 h-10 text-emerald-500" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Our mission
+              Our Mission
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              Lorem ipsum is simply dummy text of the printing and typesetting
-              industry's standard dummy text ever since the 1500s.
+              To power a sustainably clean future by providing high-quality,
+              reliable, and affordable solar energy solutions, helping customers
+              save on costs and drastically reduce their carbon footprint.
             </p>
           </div>
           <div className="text-center">
@@ -80,11 +125,12 @@ export default function AboutPage() {
               <Lightbulb className="w-10 h-10 text-emerald-500" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Our vision
+              Our Vision
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              Lorem ipsum is simply dummy text of the printing and typesetting
-              industry's standard dummy text ever since the 1500s.
+              To create a world where energy abundance and environmental
+              responsibility coexist harmoniously, building a health hazard-free
+              society through comprehensive solar ecosystems.
             </p>
           </div>
         </div>
