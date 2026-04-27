@@ -59,14 +59,14 @@ export default function AboutPage() {
 
       {/* 2. LEADER/HERO SECTION (Full Width Slider) */}
       {/* The h-[50vh] and overflow-hidden classes are CRUCIAL for the slider */}
-      <div className="relative text-center mb-16 h-[50vh] overflow-hidden">
+      <div className="relative text-center mb-10 md:mb-16 h-[35vh] sm:h-[40vh] md:h-[50vh] overflow-hidden">
         
         {/* Title positioned over the image. This stays static. */}
         <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center p-4 z-10">
-          <h1 className="text-5xl font-extrabold text-white mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-3 md:mb-4 px-4">
             About NEES GLOBAL SERVICES
           </h1>
-          <p className="text-xl text-gray-200">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200">
             Powering a Sustainably Clean Future
           </p>
         </div>
@@ -87,14 +87,14 @@ export default function AboutPage() {
       {/* --- */}
 
       {/* 3. Main Content Container */}
-      <div className="max-w-7xl mx-auto px-4 py-16 pt-0">
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-16 pt-0">
         
         {/* About Us Summary */}
-        <div className="text-center mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-10 md:mb-16 px-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
             Our Journey
           </h2>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
             NEES Global Services stands as a beacon of hope in a world facing
             escalating energy demands and the urgent call to combat climate
             change. We are at the forefront of the solar revolution, offering
@@ -106,28 +106,28 @@ export default function AboutPage() {
         </div>
 
         {/* Mission & Vision */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-10 md:mb-16">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-100 rounded-full mb-6">
-              <Users className="w-10 h-10 text-emerald-500" />
+            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-emerald-100 rounded-full mb-4 md:mb-6">
+              <Users className="w-8 h-8 md:w-10 md:h-10 text-emerald-500" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
               Our Mission
             </h2>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
               To power a sustainably clean future by providing high-quality,
               reliable, and affordable solar energy solutions, helping customers
               save on costs and drastically reduce their carbon footprint.
             </p>
           </div>
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-100 rounded-full mb-6">
-              <Lightbulb className="w-10 h-10 text-emerald-500" />
+            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-emerald-100 rounded-full mb-4 md:mb-6">
+              <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-emerald-500" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
               Our Vision
             </h2>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
               To create a world where energy abundance and environmental
               responsibility coexist harmoniously, building a health hazard-free
               society through comprehensive solar ecosystems.
@@ -136,39 +136,39 @@ export default function AboutPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-10 md:mb-16">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-8 text-center border-4 border-emerald-500"
+              className="bg-white rounded-lg p-4 sm:p-6 md:p-8 text-center border-2 sm:border-4 border-emerald-500"
             >
-              <div className="text-4xl font-bold text-gray-900 mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
                 {stat.value}
               </div>
-              <div className="text-gray-600">{stat.label}</div>
+              <div className="text-gray-600 text-sm md:text-base">{stat.label}</div>
             </div>
           ))}
         </div>
 
         {/* Our Team */}
-        <div className="mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">
+        <div className="mb-10 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8 md:mb-12">
             Our team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {team.map((member, index) => (
               <div key={index} className="bg-white rounded-lg overflow-hidden">
                 <img
                   src={member.image || '/placeholder.svg'}
                   alt={member.name}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-40 sm:h-48 md:h-64 object-cover"
                 />
-                <div className="p-6">
-                  <h3 className="font-bold text-gray-900 mb-1">
+                <div className="p-3 sm:p-4 md:p-6">
+                  <h3 className="font-bold text-gray-900 mb-1 text-sm md:text-base">
                     {member.name}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-3">{member.role}</p>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-xs md:text-sm text-gray-600 mb-2 md:mb-3">{member.role}</p>
+                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed hidden sm:block">
                     {member.description}
                   </p>
                 </div>

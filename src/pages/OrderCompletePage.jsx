@@ -25,42 +25,42 @@ export default function OrderCompletePage() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="bg-white rounded-lg p-6 md:p-8 mb-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+      <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 md:py-12">
+        <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 mb-6 md:mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 md:gap-4 mb-6 md:mb-8">
             <div>
-              <p className="text-gray-600 mb-1">Order no. {orderNumber}</p>
-              <p className="text-gray-600 text-sm">{orderDate}</p>
+              <p className="text-gray-600 mb-0.5 md:mb-1 text-sm md:text-base">Order no. {orderNumber}</p>
+              <p className="text-gray-600 text-xs md:text-sm">{orderDate}</p>
             </div>
             <div className="text-left sm:text-right">
-              <p className="text-gray-600 mb-1">Order total</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-gray-600 mb-0.5 md:mb-1 text-sm md:text-base">Order total</p>
+              <p className="text-xl md:text-2xl font-bold text-gray-900">
                 ₦{orderTotal.toFixed(2)}
               </p>
             </div>
           </div>
 
-          <div className="text-center py-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full mb-4">
-              <CheckCircle className="w-10 h-10 text-emerald-500" />
+          <div className="text-center py-8 md:py-12">
+            <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-emerald-100 rounded-full mb-3 md:mb-4">
+              <CheckCircle className="w-8 h-8 md:w-10 md:h-10 text-emerald-500" />
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">
               Thank you for order
             </h1>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
               Your order will ship within few hours
             </p>
-            <button className="bg-emerald-500 text-white px-8 py-3 rounded-lg hover:bg-emerald-600 font-medium">
+            <button className="bg-emerald-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-emerald-600 font-medium text-sm sm:text-base">
               TRACKING DETAILS
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 pt-6 md:pt-8 border-t">
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">
+              <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
                 Delivery address
               </h3>
-              <div className="text-gray-700 space-y-1 text-sm">
+              <div className="text-gray-700 space-y-1 text-xs md:text-sm">
                 <p>Lorem ipsum</p>
                 <p>7003 fairway street</p>
                 <p>New york</p>
@@ -70,10 +70,10 @@ export default function OrderCompletePage() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">
+              <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
                 Payment summary
               </h3>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-xs md:text-sm">
                 <div className="flex justify-between text-gray-700">
                   <span>Transaction No.:</span>
                   <span>{Math.floor(Math.random() * 1000000000)}</span>
