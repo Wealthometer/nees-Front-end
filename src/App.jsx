@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+
 import HomePage from './pages/HomePage'
 import ProductPage from './pages/ProductPage'
 import ProductDetailPage from './pages/ProductDetailPage'
@@ -10,10 +11,18 @@ import OrderCompletePage from './pages/OrderCompletePage'
 import ContactPage from './pages/ContactPage'
 import AboutPage from './pages/AboutPage'
 import WishlistPage from './pages/WishlistPage'
+import Blocked from './pages/Blocked'
+
 import { CartProvider } from './context/CartContext'
 import { WishlistProvider } from './context/WishlistContext'
 
+const IS_BLOCKED = true
+
 function App() {
+  if (IS_BLOCKED) {
+    return <Blocked />
+  }
+
   return (
     <CartProvider>
       <WishlistProvider>
