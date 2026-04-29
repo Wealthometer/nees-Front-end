@@ -1,5 +1,7 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://nees-1.onrender.com/api'
-const RENDER_BASE_URL = import.meta.env.VITE_BASE_URL || 'https://nees-1.onrender.com'
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || 'https://nees-1.onrender.com/api'
+const RENDER_BASE_URL =
+  import.meta.env.VITE_BASE_URL || 'https://nees-1.onrender.com'
 // Helper function to handle API responses
 const handleResponse = async (response) => {
   if (!response.ok) {
