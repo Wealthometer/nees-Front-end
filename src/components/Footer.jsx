@@ -4,37 +4,40 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t mt-16">
       {/* Brand logos */}
-     <div className="bg-emerald-500 py-6 md:py-8 overflow-hidden relative">
-  <div className="max-w-7xl mx-auto px-4">
-    <div className="flex animate-slide whitespace-nowrap space-x-6 sm:space-x-8 md:space-x-12 text-white text-sm sm:text-base md:text-xl font-semibold opacity-90 tracking-wide">
-      <span>Durability</span>
-      <span>High Performance</span>
-      <span>Energy Efficient</span>
-      <span>Premium Quality</span>
-      <span>Long Warranty</span>
-      <span>Top Reliability</span>
-      {/* Repeat to make it seamless */}
-      <span>Durability</span>
-      <span>High Performance</span>
-      <span>Energy Efficient</span>
-      <span>Premium Quality</span>
-      <span>Long Warranty</span>
-      <span>Top Reliability</span>
-    </div>
-  </div>
-</div>
+      <div className="bg-emerald-500 py-6 md:py-8 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex animate-slide whitespace-nowrap space-x-6 sm:space-x-8 md:space-x-12 text-white text-sm sm:text-base md:text-xl font-semibold opacity-90 tracking-wide">
+            <span>Durability</span>
+            <span>High Performance</span>
+            <span>Energy Efficient</span>
+            <span>Premium Quality</span>
+            <span>Long Warranty</span>
+            <span>Top Reliability</span>
+            {/* Repeat to make it seamless */}
+            <span>Durability</span>
+            <span>High Performance</span>
+            <span>Energy Efficient</span>
+            <span>Premium Quality</span>
+            <span>Long Warranty</span>
+            <span>Top Reliability</span>
+          </div>
+        </div>
+      </div>
 
-<style jsx>{`
-  @keyframes slide {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .animate-slide {
-    display: inline-flex;
-    animation: slide 15s linear infinite;
-  }
-`}</style>
-
+      <style jsx>{`
+        @keyframes slide {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-slide {
+          display: inline-flex;
+          animation: slide 15s linear infinite;
+        }
+      `}</style>
 
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
@@ -54,7 +57,9 @@ export default function Footer() {
 
           {/* Help with */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">Help with</h3>
+            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
+              Help with
+            </h3>
             <ul className="space-y-1.5 md:space-y-2 text-gray-600 text-xs md:text-sm">
               <li>
                 <Link to="/contact" className="hover:text-emerald-500">
@@ -86,7 +91,9 @@ export default function Footer() {
 
           {/* Information */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">Information</h3>
+            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
+              Information
+            </h3>
             <ul className="space-y-1.5 md:space-y-2 text-gray-600 text-xs md:text-sm">
               <li>
                 <Link to="/about" className="hover:text-emerald-500">
@@ -118,7 +125,9 @@ export default function Footer() {
 
           {/* Top category */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">Top category</h3>
+            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
+              Top category
+            </h3>
             <ul className="space-y-1.5 md:space-y-2 text-gray-600 text-xs md:text-sm">
               <li>
                 <Link to="/products" className="hover:text-emerald-500">
@@ -150,7 +159,9 @@ export default function Footer() {
 
           {/* Contact info */}
           <div className="col-span-2 sm:col-span-1">
-            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">Contact info</h3>
+            <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
+              Contact info
+            </h3>
             <div className="space-y-2 md:space-y-3 text-gray-600 text-xs md:text-sm">
               <p>Phone: +234 806 897 6393</p>
               <p>Email: neesolar@gmail.com</p>
@@ -183,7 +194,10 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t text-center text-gray-600 text-xs md:text-sm">
-          <a target='_blank' href="../../../back-end/public/admin-login.html"> © {new Date().getFullYear()} Copyright Nees Solar Panel</a>
+          <a target="_blank" href={import.meta.env.VITE_ADMIN_URL || 'https://nees-1.onrender.com/admin-login.html'}>
+            {' '}
+            © {new Date().getFullYear()} Copyright Nees Solar Panel
+          </a>
         </div>
       </div>
     </footer>

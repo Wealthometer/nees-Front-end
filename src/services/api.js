@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://nees-1.onrender.com/api'
-const RENDER_BASE_URL = 'https://nees-1.onrender.com'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://nees-1.onrender.com/api'
+const RENDER_BASE_URL = import.meta.env.VITE_BASE_URL || 'https://nees-1.onrender.com'
 // Helper function to handle API responses
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -24,7 +24,9 @@ export const productsAPI = {
     const response = await fetch(`${API_BASE_URL}/products`)
     const products = await handleResponse(response)
     const parsedId = Number.parseInt(id)
-    return products.find((p) => p.id === parsedId || String(p.id) === String(id))
+    return products.find(
+      (p) => p.id === parsedId || String(p.id) === String(id)
+    )
   },
 
   // Add new product (protected)
@@ -131,10 +133,8 @@ export const adminAPI = {
 
 // Helper to get image URL
 export const getImageUrl = (imagePath) => {
-  if (!imagePath) return '/placeholder.svg?height=400&width=400'
-  if (imagePath.startsWith('http')) return imagePath
-  
-  // FIX: Use the secure Render domain instead of localhost
-  // Example: https://nees-1.onrender.com + /uploads/image.jpg
-  return `${RENDER_BASE_URL}${imagePath}` 
+  if (!imagePath) return '/placeholder.svg?height=400&width=400'
+  if (imagePath.startsWith('http')) return imagePath // FIX: Use the secure Render domain instead of localhost
+  // Example: https://nees-1.onrender.com + /uploads/image.jpg
+  return `${RENDER_BASE_URL}${imagePath}`
 }
