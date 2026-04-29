@@ -23,7 +23,8 @@ export const productsAPI = {
   getById: async (id) => {
     const response = await fetch(`${API_BASE_URL}/products`)
     const products = await handleResponse(response)
-    return products.find((p) => p.id === Number.parseInt(id))
+    const parsedId = Number.parseInt(id)
+    return products.find((p) => p.id === parsedId || String(p.id) === String(id))
   },
 
   // Add new product (protected)

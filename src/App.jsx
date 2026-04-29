@@ -16,7 +16,7 @@ import Blocked from './pages/Blocked'
 import { CartProvider } from './context/CartContext'
 import { WishlistProvider } from './context/WishlistContext'
 
-const IS_BLOCKED = true
+const IS_BLOCKED = false
 
 function App() {
   if (IS_BLOCKED) {
