@@ -28,6 +28,43 @@ export default function CheckoutPage() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handlePlaceOrder = () => {
+    // const whatsappNumber = '2349113562352'
+    const whatsappNumber = '2348068739137'
+
+    // Format the list of products for the message
+    const itemsList = cartItems
+      .map(
+        (item) =>
+          `- ${item.name} (x${item.quantity}): ₦${(
+            item.price * item.quantity
+          ).toLocaleString()}`
+      )
+      .join('\n')
+
+    // Get the image URL for the first item in the cart as a reference
+    const referenceImage =
+      cartItems.length > 0 ? getImageUrl(cartItems[0].thumbnail) : ''
+
+    const message =
+      `*New Order Received*\n\n` +
+      `*Customer Info:*\n` +
+      `Name: ${formData.firstName} ${formData.lastName}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Address: ${formData.address}, ${formData.city}, ${formData.state}\n\n` +
+      `*Items:*\n${itemsList}\n\n` +
+      `*Total:* ₦${subtotal.toLocaleString()}\n` +
+      `*Payment Method:* ${formData.paymentMethod}\n\n` +
+      `*Reference Image:* ${referenceImage}\n` +
+      `Checkout Page: ${window.location.href}`
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      message
+    )}`
+    window.open(whatsappUrl, '_blank')
+    clearCart()
+  }
+
   return (
     <div className="bg-gray-50">
       {/* Breadcrumb */}
@@ -41,9 +78,10 @@ export default function CheckoutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
           {/* FORM SUBMISSION START */}
           <form
-            action="https://formsubmit.co/alexandermfoniso18@gmail.com"
+            // action="https://formsubmit.co/alexandermfoniso18@gmail.com"
+            action="https://formsubmit.co/neesglobalservice@gmail.com"
             method="POST"
-            onSubmit={() => clearCart()}
+            onSubmit={handlePlaceOrder}
             className="lg:col-span-2 bg-white rounded-lg p-4 md:p-6"
           >
             {/* FormSubmit hidden config */}
@@ -180,7 +218,9 @@ export default function CheckoutPage() {
                   onChange={handleInputChange}
                   className="w-4 h-4 text-emerald-500"
                 />
-                <span className="text-sm md:text-base">Direct bank transfer</span>
+                <span className="text-sm md:text-base">
+                  Direct bank transfer
+                </span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -242,7 +282,9 @@ export default function CheckoutPage() {
                     className="w-12 h-12 sm:w-16 sm:h-16 object-contain bg-gray-50 rounded-lg flex-shrink-0"
                   />
                   <div className="min-w-0">
-                    <h4 className="font-medium text-gray-900 text-sm truncate">{item.name}</h4>
+                    <h4 className="font-medium text-gray-900 text-sm truncate">
+                      {item.name}
+                    </h4>
                     <p className="text-xs sm:text-sm text-gray-600">
                       ₦{item.price.toFixed(2)} × {item.quantity}
                     </p>

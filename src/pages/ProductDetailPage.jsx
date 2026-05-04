@@ -82,6 +82,32 @@ export default function ProductDetailPage() {
       ? product.images.map((img) => getImageUrl(img))
       : [getImageUrl(product.thumbnail)]
 
+  const handleBuyNowAndWhatsApp = () => {
+    // Add the product to the cart
+    addToCart(product, quantity)
+
+    const whatsappNumber = '2349113562352' // International format for Nigeria
+    const currentProductImageUrl =
+      productImages[selectedImage] || '/placeholder.svg'
+
+    // Construct the message for WhatsApp
+    const message =
+      `Hello, I'm interested in purchasing the following product:\n\n` +
+      `Product Name: ${product.name}\n` +
+      `Quantity: ${quantity}\n` +
+      `Price per item: ₦${Number(product.price).toFixed(2)}\n` +
+      `Total Price: ₦${(Number(product.price) * quantity).toFixed(2)}\n\n` +
+      `Product Image: ${currentProductImageUrl}\n` +
+      `Product Page: ${window.location.href}`
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      message
+    )}`
+    window.open(whatsappUrl, '_blank') // Open WhatsApp in a new tab
+
+    navigate('/cart')
+  }
+
   return (
     <div className="bg-gray-50">
       <div className="bg-gray-800 text-white py-4">
@@ -135,7 +161,9 @@ export default function ProductDetailPage() {
                   />
                 ))}
               </div>
-              <span className="text-gray-600 text-xs sm:text-sm">(5 Reviews)</span>
+              <span className="text-gray-600 text-xs sm:text-sm">
+                (5 Reviews)
+              </span>
             </div>
 
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
@@ -163,7 +191,9 @@ export default function ProductDetailPage() {
 
             {product.description && (
               <div className="mb-4 md:mb-6">
-                <p className="font-semibold text-gray-900 mb-1.5 md:mb-2 text-sm md:text-base">Description:</p>
+                <p className="font-semibold text-gray-900 mb-1.5 md:mb-2 text-sm md:text-base">
+                  Description:
+                </p>
                 <p className="text-gray-700 leading-relaxed text-sm md:text-base">
                   {product.description.replace(/<[^>]+>/g, '')}
                 </p>
@@ -171,7 +201,9 @@ export default function ProductDetailPage() {
             )}
 
             <div className="mb-4 md:mb-6">
-              <p className="font-semibold text-gray-900 mb-2 md:mb-3 text-sm md:text-base">Quantity:</p>
+              <p className="font-semibold text-gray-900 mb-2 md:mb-3 text-sm md:text-base">
+                Quantity:
+              </p>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -199,10 +231,7 @@ export default function ProductDetailPage() {
                 ADD TO CART
               </button>
               <button
-                onClick={() => {
-                  addToCart(product, quantity)
-                  navigate('/cart')
-                }}
+                onClick={handleBuyNowAndWhatsApp}
                 className="flex-1 bg-purple-600 text-white py-2.5 md:py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-sm md:text-base"
               >
                 BUY NOW
@@ -233,7 +262,9 @@ export default function ProductDetailPage() {
                 <span className="font-semibold">SKU:</span> {product.id}
               </p>
               <div className="flex items-center gap-3 md:gap-4">
-                <span className="font-semibold text-gray-900 text-sm md:text-base">Share:</span>
+                <span className="font-semibold text-gray-900 text-sm md:text-base">
+                  Share:
+                </span>
                 <div className="flex gap-3">
                   <button className="text-gray-600 hover:text-emerald-500">
                     <Facebook className="w-4 h-4 md:w-5 md:h-5" />
