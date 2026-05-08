@@ -29,8 +29,8 @@ export default function CheckoutPage() {
   }
 
   const handlePlaceOrder = () => {
-    // const whatsappNumber = '2349113562352'
-    const whatsappNumber = '2348068739137'
+    const whatsappNumber = '2349113562352'
+    // const whatsappNumber = '2348068739137'
 
     // Format the list of products for the message
     const itemsList = cartItems
