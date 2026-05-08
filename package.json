@@ -24,6 +24,7 @@
     "start": "node back-end/server.js"
   },
   "dependencies": {
+    "@swc/core": "^1.15.33",
     "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
     "lucide-react": "^0.545.0",
