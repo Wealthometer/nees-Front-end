@@ -28,21 +28,20 @@ export default function CheckoutPage() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handlePlaceOrder = () => {
-    const whatsappNumber = '2349113562352'
-    // const whatsappNumber = '2348068739137'
+  const handlePlaceOrder = async (e) => {
+    e.preventDefault()
 
-    // Format the list of products for the message
+    // const whatsappNumber = '2349113562352'
+    const whatsappNumber = '2348068739137'
+    // 2348068739137
+
     const itemsList = cartItems
       .map(
         (item) =>
-          `- ${item.name} (x${item.quantity}): ₦${(
-            item.price * item.quantity
-          ).toLocaleString()}`
+          `- ${item.name} (x${item.quantity}): ₦${(item.price * item.quantity).toLocaleString()}`
       )
       .join('\n')
 
-    // Get the image URL for the first item in the cart as a reference
     const referenceImage =
       cartItems.length > 0 ? getImageUrl(cartItems[0].thumbnail) : ''
 
@@ -55,13 +54,32 @@ export default function CheckoutPage() {
       `*Items:*\n${itemsList}\n\n` +
       `*Total:* ₦${subtotal.toLocaleString()}\n` +
       `*Payment Method:* ${formData.paymentMethod}\n\n` +
-      `*Reference Image:* ${referenceImage}\n` +
-      `Checkout Page: ${window.location.href}`
+      `*Reference Image:* ${referenceImage}`
 
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      message
-    )}`
+    // 1. Send to FormSubmit silently in background
+    const formPayload = new FormData()
+    formPayload.append('firstName', formData.firstName)
+    formPayload.append('lastName', formData.lastName)
+    formPayload.append('email', formData.email)
+    formPayload.append('phone', formData.phone)
+    formPayload.append('address', `${formData.address}, ${formData.city}, ${formData.state}`)
+    formPayload.append('paymentMethod', formData.paymentMethod)
+    formPayload.append('cartDetails', itemsList)
+    formPayload.append('total', `₦${subtotal.toLocaleString()}`)
+    formPayload.append('_subject', 'New Checkout Order')
+    formPayload.append('_template', 'table')
+    formPayload.append('_captcha', 'false')
+
+    // fetch('https://formsubmit.co/alexandermfoniso18@gmail.com', {
+    fetch('https://formsubmit.co/neesglobalservice@gmail.com', {
+      method: 'POST',
+      body: formPayload,
+    }).catch(() => {}) // silent — don't block WhatsApp redirect
+
+    // 2. Open WhatsApp for the user
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
+
     clearCart()
   }
 
@@ -76,24 +94,11 @@ export default function CheckoutPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-          {/* FORM SUBMISSION START */}
+
           <form
-            // action="https://formsubmit.co/alexandermfoniso18@gmail.com"
-            action="https://formsubmit.co/neesglobalservice@gmail.com"
-            method="POST"
             onSubmit={handlePlaceOrder}
             className="lg:col-span-2 bg-white rounded-lg p-4 md:p-6"
           >
-            {/* FormSubmit hidden config */}
-            <input type="hidden" name="_subject" value="New Checkout Order" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input
-              type="hidden"
-              name="_next"
-              value={`${window.location.origin}/order-complete`}
-            />
-
             <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-900">
               Billing details
             </h2>
@@ -218,9 +223,7 @@ export default function CheckoutPage() {
                   onChange={handleInputChange}
                   className="w-4 h-4 text-emerald-500"
                 />
-                <span className="text-sm md:text-base">
-                  Direct bank transfer
-                </span>
+                <span className="text-sm md:text-base">Direct bank transfer</span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -248,14 +251,6 @@ export default function CheckoutPage() {
               </label>
             </div>
 
-            {/* Add hidden cart data */}
-            <textarea
-              name="cartDetails"
-              readOnly
-              value={JSON.stringify(cartItems, null, 2)}
-              className="hidden"
-            />
-
             <div className="mt-6 md:mt-8">
               <button
                 type="submit"
@@ -265,7 +260,6 @@ export default function CheckoutPage() {
               </button>
             </div>
           </form>
-          {/* FORM END */}
 
           {/* ORDER SUMMARY */}
           <div className="lg:col-span-1 bg-white rounded-lg p-4 md:p-6 lg:sticky lg:top-4 h-fit">
@@ -300,6 +294,7 @@ export default function CheckoutPage() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
