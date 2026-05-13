@@ -1,6 +1,10 @@
-  import { Link } from 'react-router-dom'
+﻿  import { Link } from 'react-router-dom'
 
   export default function Footer() {
+    const adminUrl =
+      import.meta.env.VITE_ADMIN_URL ||
+      'https://api.yunqidaenergyneessolar.com/admin-login.html'
+
     return (
       <footer className="bg-white border-t mt-16">
         {/* Brand logos */}
@@ -194,25 +198,13 @@
 
           {/* Copyright */}
           <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t text-center text-gray-600 text-xs md:text-sm">
-            <a
-              target="_blank"
-              href={
-        
-                'https://api.yunqidaenergyneessolar.com'
-              }
-            >
-            {/* <a
-              target="_blank"
-              href={
-                import.meta.env.VITE_ADMIN_URL ||
-                'https://nees-1.onrender.com/admin-login.html'
-              }
-            > */}
+            <a target="_blank" rel="noreferrer" href={adminUrl}>
               {' '}
-              © {new Date().getFullYear()} Copyright Nees Solar Panel
+              (c) {new Date().getFullYear()} Copyright Nees Solar Panel
             </a>
           </div>
         </div>
       </footer>
     )
   }
+
