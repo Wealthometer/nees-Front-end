@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import { getImageUrl } from '../services/api'
+import { formatNaira } from '../utils/formatCurrency'
 
 export default function CheckoutPage() {
   const { cartItems, getCartTotal, clearCart } = useCart()
@@ -38,7 +39,7 @@ export default function CheckoutPage() {
     const itemsList = cartItems
       .map(
         (item) =>
-          `- ${item.name} (x${item.quantity}): ₦${(item.price * item.quantity).toLocaleString()}`
+          `- ${item.name} (x${item.quantity}): ₦${formatNaira(item.price * item.quantity)}`
       )
       .join('\n')
 
@@ -52,7 +53,7 @@ export default function CheckoutPage() {
       `Phone: ${formData.phone}\n` +
       `Address: ${formData.address}, ${formData.city}, ${formData.state}\n\n` +
       `*Items:*\n${itemsList}\n\n` +
-      `*Total:* ₦${subtotal.toLocaleString()}\n` +
+      `*Total:* ₦${formatNaira(subtotal)}\n` +
       `*Payment Method:* ${formData.paymentMethod}\n\n` +
       `*Reference Image:* ${referenceImage}`
 
@@ -65,7 +66,7 @@ export default function CheckoutPage() {
     formPayload.append('address', `${formData.address}, ${formData.city}, ${formData.state}`)
     formPayload.append('paymentMethod', formData.paymentMethod)
     formPayload.append('cartDetails', itemsList)
-    formPayload.append('total', `₦${subtotal.toLocaleString()}`)
+    formPayload.append('total', `₦${formatNaira(subtotal)}`)
     formPayload.append('_subject', 'New Checkout Order')
     formPayload.append('_template', 'table')
     formPayload.append('_captcha', 'false')
@@ -280,7 +281,7 @@ export default function CheckoutPage() {
                       {item.name}
                     </h4>
                     <p className="text-xs sm:text-sm text-gray-600">
-                      ₦{item.price.toFixed(2)} × {item.quantity}
+                      ₦{formatNaira(item.price)} × {item.quantity}
                     </p>
                   </div>
                 </div>
@@ -290,7 +291,7 @@ export default function CheckoutPage() {
             <div className="border-t pt-3 md:pt-4">
               <div className="flex justify-between font-semibold text-base md:text-lg">
                 <span>Total</span>
-                <span>₦{subtotal.toFixed(2)}</span>
+                <span>₦{formatNaira(subtotal)}</span>
               </div>
             </div>
           </div>

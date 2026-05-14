@@ -3,6 +3,7 @@
 import { CheckCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useCart } from '../context/CartContext'
+import { formatNaira } from '../utils/formatCurrency'
 
 export default function OrderCompletePage() {
   const { getCartTotal } = useCart()
@@ -35,7 +36,7 @@ export default function OrderCompletePage() {
             <div className="text-left sm:text-right">
               <p className="text-gray-600 mb-0.5 md:mb-1 text-sm md:text-base">Order total</p>
               <p className="text-xl md:text-2xl font-bold text-gray-900">
-                ₦{orderTotal.toFixed(2)}
+                ₦{formatNaira(orderTotal)}
               </p>
             </div>
           </div>
@@ -80,7 +81,7 @@ export default function OrderCompletePage() {
                 </div>
                 <div className="flex justify-between text-gray-700">
                   <span>Price</span>
-                  <span>₦{orderTotal.toFixed(2)}</span>
+                  <span>₦{formatNaira(orderTotal)}</span>
                 </div>
                 <div className="flex justify-between text-gray-700">
                   <span>Shipping charge</span>
@@ -88,7 +89,7 @@ export default function OrderCompletePage() {
                 </div>
                 <div className="flex justify-between font-semibold text-gray-900 pt-2 border-t">
                   <span>Order Total</span>
-                  <span>₦{orderTotal.toFixed(2)}</span>
+                  <span>₦{formatNaira(orderTotal)}</span>
                 </div>
               </div>
             </div>
@@ -98,3 +99,4 @@ export default function OrderCompletePage() {
     </div>
   )
 }
+

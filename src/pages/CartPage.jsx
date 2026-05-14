@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import { useCart } from '../context/CartContext'
 import { productsAPI, getImageUrl } from '../services/api'
+import { formatNaira } from '../utils/formatCurrency'
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, clearCart, getCartTotal } =
@@ -89,7 +90,7 @@ export default function CartPage() {
                             Category: {item.category}
                           </p>
                           <p className="text-emerald-600 font-semibold text-sm md:text-base">
-                            ₦{Number(item.price).toFixed(2)}
+                            ₦{formatNaira(item.price)}
                           </p>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3">
@@ -112,7 +113,7 @@ export default function CartPage() {
                         </div>
                         <div className="flex items-center gap-3 sm:gap-4 sm:flex-col sm:items-end">
                           <p className="font-semibold text-gray-900 text-sm md:text-base">
-                            ₦{(item.price * item.quantity).toFixed(2)}
+                            ₦{formatNaira(item.price * item.quantity)}
                           </p>
                           <button
                             onClick={() => removeFromCart(item.id)}
@@ -201,7 +202,7 @@ export default function CartPage() {
                   <div className="space-y-2 md:space-y-3 mb-4 md:mb-6">
                     <div className="flex justify-between text-gray-700 text-sm md:text-base">
                       <span>Subtotal</span>
-                      <span>₦{subtotal.toFixed(2)}</span>
+                      <span>₦{formatNaira(subtotal)}</span>
                     </div>
                     <div className="flex justify-between text-gray-700 text-sm md:text-base">
                       <span>Shipping Charge</span>
@@ -209,7 +210,7 @@ export default function CartPage() {
                     </div>
                     <div className="pt-2 md:pt-3 border-t flex justify-between font-semibold text-base md:text-lg">
                       <span>Total</span>
-                      <span>₦{subtotal.toFixed(2)}</span>
+                      <span>₦{formatNaira(subtotal)}</span>
                     </div>
                   </div>
                   <input
@@ -278,3 +279,5 @@ export default function CartPage() {
     </div>
   )
 }
+
+

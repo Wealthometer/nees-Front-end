@@ -14,6 +14,7 @@ import {
 import ProductCard from '../components/ProductCard'
 import { productsAPI, getImageUrl } from '../services/api'
 import { useCart } from '../context/CartContext'
+import { formatNaira } from '../utils/formatCurrency'
 
 export default function ProductDetailPage() {
   const { id } = useParams()
@@ -95,8 +96,8 @@ export default function ProductDetailPage() {
       `Hello, I'm interested in purchasing the following product:\n\n` +
       `Product Name: ${product.name}\n` +
       `Quantity: ${quantity}\n` +
-      `Price per item: ₦${Number(product.price).toFixed(2)}\n` +
-      `Total Price: ₦${(Number(product.price) * quantity).toFixed(2)}\n\n` +
+      `Price per item: ₦${formatNaira(product.price)}\n` +
+      `Total Price: ₦${formatNaira(Number(product.price) * quantity)}\n\n` +
       `Product Image: ${currentProductImageUrl}\n` +
       `Product Page: ${window.location.href}`
 
@@ -172,7 +173,7 @@ export default function ProductDetailPage() {
 
             <div className="flex items-center gap-4 mb-4 md:mb-6">
               <span className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
-                ₦{Number(product.price).toFixed(2)}
+                ₦{formatNaira(product.price)}
               </span>
             </div>
 
@@ -332,3 +333,4 @@ export default function ProductDetailPage() {
     </div>
   )
 }
+

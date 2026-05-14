@@ -5,6 +5,7 @@ import { Star, Heart } from 'lucide-react'
 import { getImageUrl } from '../services/api'
 import { useWishlist } from '../context/WishlistContext'
 import { useCart } from '../context/CartContext'
+import { formatNaira } from '../utils/formatCurrency'
 
 export default function ProductCard({ product }) {
   const imageUrl = getImageUrl(
@@ -57,7 +58,7 @@ export default function ProductCard({ product }) {
           {product.name}
         </h3>
         <p className="text-emerald-600 font-semibold mb-2 sm:mb-3 text-sm md:text-base">
-          ₦{Number(product.price).toFixed(2)}
+          ₦{formatNaira(product.price)}
         </p>
         <div className="flex items-center gap-0.5 sm:gap-1 mb-3 md:mb-4">
           {[...Array(5)].map((_, i) => (
@@ -76,3 +77,4 @@ export default function ProductCard({ product }) {
     </div>
   )
 }
+

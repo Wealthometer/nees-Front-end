@@ -5,6 +5,7 @@ import { Trash2, ShoppingCart, Heart } from 'lucide-react'
 import { useWishlist } from '../context/WishlistContext'
 import { useCart } from '../context/CartContext'
 import { getImageUrl } from '../services/api'
+import { formatNaira } from '../utils/formatCurrency'
 
 export default function WishlistPage() {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist()
@@ -100,7 +101,7 @@ export default function WishlistPage() {
               </p>
               <div className="flex items-center justify-between mb-3 md:mb-4">
                 <span className="text-emerald-500 font-bold text-sm sm:text-base md:text-xl">
-                  ₦{product.price?.toLocaleString()}
+                  ₦{formatNaira(product.price)}
                 </span>
                 {product.category && (
                   <span className="text-[10px] sm:text-xs bg-gray-100 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-gray-600 hidden sm:inline">
@@ -133,3 +134,4 @@ export default function WishlistPage() {
     </div>
   )
 }
+

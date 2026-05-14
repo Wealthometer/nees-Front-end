@@ -1,9 +1,7 @@
 ﻿  import { Link } from 'react-router-dom'
 
   export default function Footer() {
-    const adminUrl =
-      import.meta.env.VITE_ADMIN_URL ||
-      'https://api.yunqidaenergyneessolar.com/admin-login.html'
+    const adminUrl = import.meta.env.VITE_ADMIN_URL || 'https://api.yunqidaenergyneessolar.com'
 
     return (
       <footer className="bg-white border-t mt-16">
