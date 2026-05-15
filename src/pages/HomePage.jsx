@@ -113,7 +113,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           <div className="bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden min-h-[200px]">
             <img
-              src="/img 1.png"
+              src="/ac.png"
               alt="Indoor AC Unit"
               className="absolute right-0 bottom-0 w-32 h-32 sm:w-36 sm:h-36 md:w-48 md:h-48 object-contain"
             />
@@ -129,7 +129,7 @@ export default function HomePage() {
           </div>
           <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden min-h-[200px]">
             <img
-              src="/img 2.png"
+              src="/inverter.png"
               alt="Solar Inverters"
               className="absolute right-0 bottom-0 w-32 h-32 sm:w-36 sm:h-36 md:w-48 md:h-48 object-contain"
             />
@@ -145,7 +145,7 @@ export default function HomePage() {
           </div>
           <div className="bg-gradient-to-br from-red-400 to-red-500 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden min-h-[200px] sm:col-span-2 md:col-span-1">
             <img
-              src="/img 3.png"
+              src="/inac.png"
               alt="Outdoor AC Unit"
               className="absolute right-0 bottom-0 w-32 h-32 sm:w-36 sm:h-36 md:w-48 md:h-48 object-contain"
             />

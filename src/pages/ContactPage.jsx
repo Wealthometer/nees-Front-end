@@ -40,14 +40,19 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Map */}
-        <div className="bg-white rounded-lg overflow-hidden mb-10 md:mb-16">
-          <div className="h-48 sm:h-64 md:h-96 bg-gray-200 relative">
-            <img
-              src="/placeholder.svg?height=400&width=1200"
-              alt="Map"
-              className="w-full h-full object-cover"
-            />
+        {/* Map Section */}
+        <div className="bg-white rounded-lg overflow-hidden mb-10 md:mb-16 shadow-sm border border-gray-100">
+          <div className="h-64 sm:h-80 md:h-[450px] w-full">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.444738580344!2d3.3156828!3d6.4651717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8969460298a1%3A0xc3194a282998394e!2sTomez%20Ave%2C%20Amuwo%20Odofin%2C%20Lagos!5e0!3m2!1sen!2sng!4v1715790000000!5m2!1sen!2sng" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Office Location"
+            ></iframe>
           </div>
         </div>
 
@@ -96,13 +101,13 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   placeholder="Message"
-                  rows="5"
+                  rows={5}
                   className="w-full px-3 md:px-4 py-2.5 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm md:text-base"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-emerald-500 text-white py-2.5 md:py-3 rounded-lg font-semibold hover:bg-emerald-600 text-sm md:text-base"
+                className="w-full bg-emerald-500 text-white py-2.5 md:py-3 rounded-lg font-semibold hover:bg-emerald-600 text-sm md:text-base transition-colors"
               >
                 SEND
               </button>
