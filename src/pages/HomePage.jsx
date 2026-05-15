@@ -47,9 +47,7 @@ export default function HomePage() {
                 Welcome to Nees Solar
               </p>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-                SMART
-                <br />
-                ENERGY.
+                SMART ENERGY.
               </h1>
               <p className="text-base md:text-lg mb-6 md:mb-8 opacity-90">
                 Harness the power of the sun with our premium solar solutions
