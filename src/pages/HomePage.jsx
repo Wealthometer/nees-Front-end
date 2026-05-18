@@ -60,9 +60,9 @@ export default function HomePage() {
             </div>
             <div className="relative flex justify-center lg:justify-end">
               <img
-                src="/a high quality image 1.png"
+                src="/done.png"
                 alt="Solar Panel"
-                className="w-48 sm:w-64 md:w-80 lg:w-full max-w-md transform rotate-12"
+                className="w-48 sm:w-64 md:w-80 lg:w-full max-w-md "
               />
             </div>
           </div>
