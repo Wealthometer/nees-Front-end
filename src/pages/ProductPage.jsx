@@ -252,7 +252,7 @@ export default function ProductPage() {
       {/* Featured Banner */}
       <div className="mt-6 md:mt-8 bg-gradient-to-br from-purple-500 to-yellow-400 rounded-lg p-6 text-white text-center">
         <img
-          src="/productb.png"
+          src="/chimo.png"
           alt="Featured"
           className="mx-auto mb-4 max-w-full"
         />
@@ -324,7 +324,7 @@ export default function ProductPage() {
                 </button>
               </div>
               <img
-                src="/solar-inverter.jpg"
+                src="/chai.png"
                 alt="Featured Product"
                 className="absolute right-4 sm:right-8 bottom-0 w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 object-contain hidden sm:block"
               />

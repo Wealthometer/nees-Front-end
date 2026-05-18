@@ -65,7 +65,7 @@ export default function Header() {
             <div className="flex items-center gap-2 md:gap-6">
               <div className="hidden lg:block text-right">
                 <div className="text-xs text-gray-600">Hotline number</div>
-                <div className="font-semibold text-sm">+234 0500 2400</div>
+                <div className="font-semibold text-sm">+234 806 873 9137</div>
               </div>
 
               <button
