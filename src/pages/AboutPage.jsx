@@ -10,33 +10,56 @@ export default function AboutPage() {
 
   const team = [
     {
-      name: 'Johnny walker',
-      role: 'Web designer',
-      image: '/team-1.png',
-      description:
-        'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
+      // name: 'Johnny walker',
+      // role: 'Web designer',
+      image: '/omo.jpeg',
+      // description:
+      //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
-      name: 'Rebecca flex',
-      role: 'Support staff',
-      image: '/team-3.png',
-      description:
-        'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
+      // name: 'Rebecca flex',
+      // role: 'Support staff',
+      image: '/g2.jpeg',
+      // description:
+      //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
-      name: 'Jan ringo',
-      role: 'Deputy sale',
-      image: '/team-2.png',
-      description:
-        'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
+    //   name: 'Jan ringo',
+    //   role: 'Deputy sale',
+      image: '/g1.jpeg',
+      // description:
+      //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
-      name: 'Ringo kai',
-      role: 'Policy member',
-      image: '/team-4.png',
-      description:
-        'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
+      // name: 'Ringo kai',
+      // role: 'Policy member',
+      image: '/g9.jpeg',
+      // description:
+      //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
+    },
+    {
+      image: '/g3.jpeg',
+    },
+    {
+      image: '/g4.jpeg',
+    },
+    {
+      image: '/g6.jpeg',
+    },
+    
+    {
+      image: '/g7.jpeg',
     }
+    ,
+    {
+      image: '/g8.jpeg',
+    }
+    ,
+    {
+      image: '/g5.jpeg',
+    }
+  
+
   ]
 
   // Defined the three images for the slider
@@ -153,11 +176,11 @@ export default function AboutPage() {
         {/* Our Team */}
         <div className="mb-10 md:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8 md:mb-12">
-            Our team
+            Our Gallery
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-lg overflow-hidden">
+              <div key={index} className="overflow-hidden">
                 <img
                   src={member.image || '/placeholder.svg'}
                   alt={member.name}

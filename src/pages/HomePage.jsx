@@ -272,20 +272,36 @@ export default function HomePage() {
             100% Customer review
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
-            Our customer love
+            Our Customers Love Us
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {[1, 2].map((review) => (
+          {[
+            {
+              id: 1,
+              name: "Chinelo Okafor",
+              image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=150&h=150",
+              text: "NEES made our switch to solar seamless. Their team was professional from consultation to installation, and the system has been performing reliably every day.",
+            },
+            {
+              id: 2,
+              name: "Tunde Adebayo",
+              image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=150&h=150",
+              text: "Excellent products and outstanding after-sales support. NEES delivered exactly what was promised, and our energy costs have reduced significantly.",
+            },
+          ].map((review) => (
             <div
-              key={review}
+              key={review.id}
               className="bg-white p-5 sm:p-6 md:p-8 rounded-lg border border-gray-200"
             >
               <div className="flex items-center gap-3 sm:gap-4 mb-4">
                 <img
-                  src={`/test-2.png?height=60&width=60&query=customer-${review}`}
+                  src={`/test-2.png?height=60&width=60&query=customer-${review.id}`}
                   alt="Customer"
                   className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
+                  src={review.image}
+                  alt={review.name}
+                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover"
                 />
                 <div>
                   <div className="flex gap-1 mb-1">
@@ -296,13 +312,11 @@ export default function HomePage() {
                       />
                     ))}
                   </div>
-                  <p className="text-sm text-gray-600">J.D Reviewer</p>
+                  <p className="text-sm text-gray-600">{review.name}</p>
                 </div>
               </div>
               <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                If you haven't tried NEES solar, you're missing out. Their
-                products are top-notch and the customer service is exceptional.
-                I'm a customer for life!
+                {review.text}
               </p>
               <div className="mt-4 flex items-center gap-2">
                 <span className="text-2xl text-emerald-500">¨</span>
