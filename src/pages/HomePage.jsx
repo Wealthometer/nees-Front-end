@@ -101,7 +101,9 @@ export default function HomePage() {
                   alt={category.name}
                   className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 object-contain group-hover:scale-110 transition-transform"
                 />
-                <h3 className="font-medium text-gray-900 text-sm md:text-base">{category.name}</h3>
+                <h3 className="font-medium text-gray-900 text-sm md:text-base">
+                  {category.name}
+                </h3>
               </Link>
             ))}
           </div>
@@ -206,7 +208,9 @@ export default function HomePage() {
           <p className="text-emerald-500 text-sm font-medium mb-2">
             Browse collection
           </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Trending product</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+            Trending product
+          </h2>
         </div>
         {loading ? (
           <div className="text-center py-8">Loading products...</div>
@@ -238,7 +242,9 @@ export default function HomePage() {
               className="mx-auto w-32 sm:w-40 md:w-auto hidden sm:block"
             />
             <div className="text-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Deal of the days</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+                Deal of the days
+              </h2>
               <div className="flex gap-2 sm:gap-3 md:gap-4 justify-center flex-wrap">
                 {[
                   { value: '3', label: 'DAYS' },
@@ -250,8 +256,12 @@ export default function HomePage() {
                     key={index}
                     className="bg-white text-gray-900 rounded-lg p-2 sm:p-3 md:p-4 min-w-[55px] sm:min-w-[65px] md:min-w-[80px]"
                   >
-                    <div className="text-xl sm:text-2xl md:text-3xl font-bold">{time.value}</div>
-                    <div className="text-[10px] sm:text-xs text-gray-600">{time.label}</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold">
+                      {time.value}
+                    </div>
+                    <div className="text-[10px] sm:text-xs text-gray-600">
+                      {time.label}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -279,16 +289,18 @@ export default function HomePage() {
           {[
             {
               id: 1,
-              name: "Chinelo Okafor",
-              image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=150&h=150",
-              text: "NEES made our switch to solar seamless. Their team was professional from consultation to installation, and the system has been performing reliably every day.",
+              name: 'Chinelo Okafor',
+              image:
+                'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=150&h=150',
+              text: 'NEES made our switch to solar seamless. Their team was professional from consultation to installation, and the system has been performing reliably every day.'
             },
             {
               id: 2,
-              name: "Tunde Adebayo",
-              image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=150&h=150",
-              text: "Excellent products and outstanding after-sales support. NEES delivered exactly what was promised, and our energy costs have reduced significantly.",
-            },
+              name: 'Tunde Adebayo',
+              image:
+                'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=150&h=150',
+              text: 'Excellent products and outstanding after-sales support. NEES delivered exactly what was promised, and our energy costs have reduced significantly.'
+            }
           ].map((review) => (
             <div
               key={review.id}
@@ -296,9 +308,6 @@ export default function HomePage() {
             >
               <div className="flex items-center gap-3 sm:gap-4 mb-4">
                 <img
-                  src={`/test-2.png?height=60&width=60&query=customer-${review.id}`}
-                  alt="Customer"
-                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full"
                   src={review.image}
                   alt={review.name}
                   className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover"
@@ -320,7 +329,9 @@ export default function HomePage() {
               </p>
               <div className="mt-4 flex items-center gap-2">
                 <span className="text-2xl text-emerald-500">¨</span>
-                <span className="font-semibold text-gray-900 text-sm md:text-base">Recommended</span>
+                <span className="font-semibold text-gray-900 text-sm md:text-base">
+                  Recommended
+                </span>
               </div>
             </div>
           ))}
