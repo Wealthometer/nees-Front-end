@@ -21,16 +21,16 @@ export default function Header() {
             Email: support@neessolarpanelget.com
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-            <span className="text-gray-600 text-xs md:text-sm text-center">
+            {/* <span className="text-gray-600 text-xs md:text-sm text-center">
               Free nationwide & Free return for above N0N10,000{' '}
               <Link to="/products" className="text-emerald-500 font-medium">
                 Shop now!
               </Link>
-            </span>
-            <div className="hidden lg:flex gap-4 text-gray-600 text-xs">
+            </span> */}
+            {/* <div className="hidden lg:flex gap-4 text-gray-600 text-xs">
               <span>90K Followers</span>
               <span>60K Followers</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
