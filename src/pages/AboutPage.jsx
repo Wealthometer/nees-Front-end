@@ -12,61 +12,57 @@ export default function AboutPage() {
     {
       // name: 'Johnny walker',
       // role: 'Web designer',
-      image: '/omo.jpeg',
+      image: '/omo.jpeg'
       // description:
       //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
       // name: 'Rebecca flex',
       // role: 'Support staff',
-      image: '/g2.jpeg',
+      image: '/g2.jpeg'
       // description:
       //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
-    //   name: 'Jan ringo',
-    //   role: 'Deputy sale',
-      image: '/g1.jpeg',
+      //   name: 'Jan ringo',
+      //   role: 'Deputy sale',
+      image: '/g1.jpeg'
       // description:
       //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
       // name: 'Ringo kai',
       // role: 'Policy member',
-      image: '/g9.jpeg',
+      image: '/g9.jpeg'
       // description:
       //   'Vestibulum porttitor egestas enim, vitae ullamcorper nisi vulputate quis.'
     },
     {
-      image: '/g3.jpeg',
+      image: '/g3.jpeg'
     },
     {
-      image: '/g4.jpeg',
+      image: '/g4.jpeg'
     },
     {
-      image: '/g6.jpeg',
+      image: '/g6.jpeg'
     },
-    
-    {
-      image: '/g7.jpeg',
-    }
-    ,
-    {
-      image: '/g8.jpeg',
-    }
-    ,
-    {
-      image: '/g5.jpeg',
-    }
-  
 
+    {
+      image: '/g7.jpeg'
+    },
+    {
+      image: '/g8.jpeg'
+    },
+    {
+      image: '/g5.jpeg'
+    }
   ]
 
   // Defined the three images for the slider
   const heroImages = [
     '/about-us-3.png', // Image 1
     '/about-us-3.png', // Image 2
-    '/about-us-3.png'  // Image 3
+    '/about-us-3.png' // Image 3
   ]
 
   return (
@@ -83,7 +79,6 @@ export default function AboutPage() {
       {/* 2. LEADER/HERO SECTION (Full Width Slider) */}
       {/* The h-[50vh] and overflow-hidden classes are CRUCIAL for the slider */}
       <div className="relative text-center mb-10 md:mb-16 h-[35vh] sm:h-[40vh] md:h-[50vh] overflow-hidden">
-        
         {/* Title positioned over the image. This stays static. */}
         <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center p-4 z-10">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-3 md:mb-4 px-4">
@@ -93,7 +88,7 @@ export default function AboutPage() {
             Powering a Sustainably Clean Future
           </p>
         </div>
-        
+
         {/* Carousel Wrapper - Uses the 'carousel-slide' CSS class */}
         <div className="carousel-slide h-full">
           {heroImages.map((src, index) => (
@@ -111,7 +106,6 @@ export default function AboutPage() {
 
       {/* 3. Main Content Container */}
       <div className="max-w-7xl mx-auto px-4 py-10 md:py-16 pt-0">
-        
         {/* About Us Summary */}
         <div className="text-center mb-10 md:mb-16 px-2">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 md:mb-4">
@@ -121,10 +115,10 @@ export default function AboutPage() {
             NEES Global Services stands as a beacon of hope in a world facing
             escalating energy demands and the urgent call to combat climate
             change. We are at the forefront of the solar revolution, offering
-            cutting-edge solar devices—from high-efficiency panels to smart
-            fans and air conditioners—that are investments in a brighter, greener
-            tomorrow. We are committed to empowering communities by making clean,
-            affordable energy accessible to everyone.
+            cutting-edge solar devices—from high-efficiency panels to smart fans
+            and air conditioners—that are investments in a brighter, greener
+            tomorrow. We are committed to empowering communities by making
+            clean, affordable energy accessible to everyone.
           </p>
         </div>
 
@@ -168,7 +162,9 @@ export default function AboutPage() {
               <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
                 {stat.value}
               </div>
-              <div className="text-gray-600 text-sm md:text-base">{stat.label}</div>
+              <div className="text-gray-600 text-sm md:text-base">
+                {stat.label}
+              </div>
             </div>
           ))}
         </div>
@@ -190,7 +186,9 @@ export default function AboutPage() {
                   <h3 className="font-bold text-gray-900 mb-1 text-sm md:text-base">
                     {member.name}
                   </h3>
-                  <p className="text-xs md:text-sm text-gray-600 mb-2 md:mb-3">{member.role}</p>
+                  <p className="text-xs md:text-sm text-gray-600 mb-2 md:mb-3">
+                    {member.role}
+                  </p>
                   <p className="text-xs md:text-sm text-gray-600 leading-relaxed hidden sm:block">
                     {member.description}
                   </p>
