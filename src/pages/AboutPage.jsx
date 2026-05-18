@@ -2,10 +2,10 @@ import { Users, Lightbulb } from 'lucide-react'
 
 export default function AboutPage() {
   const stats = [
-    { value: '10+', label: 'Years' },
-    { value: '10M+', label: 'Clients' },
-    { value: '50+', label: 'Shops' },
-    { value: '17M+', label: 'Sales' }
+    { value: '5+', label: 'Years' },
+    { value: '1k+', label: 'Clients' },
+    { value: '500+', label: 'Feedbacks' },
+    { value: '1.5k+', label: 'Sales' }
   ]
 
   const team = [

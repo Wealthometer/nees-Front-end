@@ -29,13 +29,17 @@ export default function ContactPage() {
               <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-emerald-500 rounded-full mb-3 md:mb-4">
                 <Phone className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
-              <p className="text-gray-700 text-sm md:text-base">+234 806 897 6393</p>
+              <p className="text-gray-700 text-sm md:text-base">
+                +234 806 897 6393
+              </p>
             </div>
             <div className="bg-white rounded-lg p-5 sm:p-6 md:p-8 text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-emerald-500 rounded-full mb-3 md:mb-4">
                 <Mail className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
-              <p className="text-gray-700 text-sm md:text-base">neesolar@gmail.com</p>
+              <p className="text-gray-700 text-sm md:text-base">
+                neesolar@gmail.com
+              </p>
             </div>
           </div>
         </div>
@@ -43,13 +47,13 @@ export default function ContactPage() {
         {/* Map Section */}
         <div className="bg-white rounded-lg overflow-hidden mb-10 md:mb-16 shadow-sm border border-gray-100">
           <div className="h-64 sm:h-80 md:h-[450px] w-full">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.444738580344!2d3.3156828!3d6.4651717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8969460298a1%3A0xc3194a282998394e!2sTomez%20Ave%2C%20Amuwo%20Odofin%2C%20Lagos!5e0!3m2!1sen!2sng!4v1715790000000!5m2!1sen!2sng" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen={true} 
-              loading="lazy" 
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2749.753254687528!2d3.30853986668356!3d6.478831118201663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b896d847293cb%3A0x77ca73e4d81be4c1!2sNEES%20GLOBAL%20SERVICES%20aka%20YUNQIDA!5e0!3m2!1sen!2sng!4v1779117266959!5m2!1sen!2sng"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Office Location"
             ></iframe>
