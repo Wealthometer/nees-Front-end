@@ -62,7 +62,7 @@ export default function HomePage() {
               <img
                 src="/done.png"
                 alt="Solar Panel"
-                className="w-48 sm:w-64 md:w-80 lg:w-full max-w-md "
+                className="w-78 sm:w-64 md:w-80 lg:w-full max-w-md "
               />
             </div>
           </div>
