@@ -30,7 +30,7 @@ export default function ContactPage() {
                 <Phone className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
               <p className="text-gray-700 text-sm md:text-base">
-                +234 806 897 6393
+                +234 806 873 9137
               </p>
             </div>
             <div className="bg-white rounded-lg p-5 sm:p-6 md:p-8 text-center">
@@ -38,7 +38,7 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
               <p className="text-gray-700 text-sm md:text-base">
-                neesolar@gmail.com
+                neesglobalservice@gmail.com
               </p>
             </div>
           </div>
