@@ -87,7 +87,7 @@ export default function ProductDetailPage() {
     // Add the product to the cart
     addToCart(product, quantity)
 
-    const whatsappNumber = '2349113562352' // International format for Nigeria
+    const whatsappNumber = '2348068739137' // International format for Nigeria
     const currentProductImageUrl =
       productImages[selectedImage] || '/placeholder.svg'
 

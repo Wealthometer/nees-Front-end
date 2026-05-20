@@ -32,8 +32,7 @@ export default function CheckoutPage() {
   const handlePlaceOrder = async (e) => {
     e.preventDefault()
 
-    // const whatsappNumber = '2349113562352'
-    const whatsappNumber = '2348068739137'
+const whatsappNumber = '2348068739137'
     // 2348068739137
 
     const itemsList = cartItems
