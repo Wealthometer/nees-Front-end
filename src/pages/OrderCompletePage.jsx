@@ -18,7 +18,7 @@ export default function OrderCompletePage() {
   }, [])
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50" data-reveal>
       {/* Breadcrumb */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
@@ -26,7 +26,7 @@ export default function OrderCompletePage() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 md:py-12">
+      <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 md:py-12" data-reveal>
         <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 mb-6 md:mb-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 md:gap-4 mb-6 md:mb-8">
             <div>
@@ -99,4 +99,5 @@ export default function OrderCompletePage() {
     </div>
   )
 }
+
 

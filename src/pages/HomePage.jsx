@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -47,11 +47,42 @@ const getInitials = (name = '') =>
     .map((part) => part[0]?.toUpperCase())
     .join('')
 
+const heroSlides = [
+  {
+    eyebrow: 'Welcome to Nees Solar',
+    title: 'SMART ENERGY.',
+    description:
+      'Harness the power of the sun with our premium solar solutions',
+    image: '/done.png',
+    buttonText: 'SHOP NOW',
+    buttonLink: '/products'
+  },
+  {
+    eyebrow: 'Clean Power Solutions',
+    title: 'POWER YOUR HOME.',
+    description:
+      'Reliable solar systems designed to keep your home and business running smoothly',
+    image: '/inverter.png',
+    buttonText: 'EXPLORE PRODUCTS',
+    buttonLink: '/products'
+  },
+  {
+    eyebrow: 'Trusted Energy Partner',
+    title: 'SAVE MORE DAILY.',
+    description:
+      'From installation to support, we help you reduce energy costs with confidence',
+    image: '/Productb.png',
+    buttonText: 'VIEW CATALOG',
+    buttonLink: '/products'
+  }
+]
+
 export default function HomePage() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [reviews, setReviews] = useState(defaultReviews)
   const [activeReviewIndex, setActiveReviewIndex] = useState(0)
+  const [activeHeroIndex, setActiveHeroIndex] = useState(0)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -128,6 +159,18 @@ export default function HomePage() {
     }
   }, [reviews.length])
 
+  useEffect(() => {
+    if (heroSlides.length < 2) return undefined
+
+    const intervalId = window.setInterval(() => {
+      setActiveHeroIndex((currentIndex) => (currentIndex + 1) % heroSlides.length)
+    }, 5000)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [])
+
   const trendingProducts = products.slice(0, 4)
 
   const categories = [...new Set(products.map((p) => p.category))]
@@ -142,31 +185,83 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-emerald-400 to-emerald-500 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-emerald-400 to-emerald-500 relative overflow-hidden" data-reveal>
         <div className="max-w-7xl mx-auto px-4 py-10 sm:py-12 md:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
-            <div className="text-white text-center lg:text-left">
-              <p className="text-xs sm:text-sm mb-2 uppercase tracking-wide">
-                Welcome to Nees Solar
-              </p>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-                SMART ENERGY.
-              </h1>
-              <p className="text-base md:text-lg mb-6 md:mb-8 opacity-90">
-                Harness the power of the sun with our premium solar solutions
-              </p>
-              <Link to="/products">
-                <button className="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-sm sm:text-base">
-                  SHOP NOW →
-                </button>
-              </Link>
+          <div className="relative rounded-3xl bg-white/10 border border-white/20 overflow-hidden">
+            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 sm:px-4 md:px-6 pointer-events-none">
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveHeroIndex(
+                    (currentIndex) =>
+                      (currentIndex - 1 + heroSlides.length) % heroSlides.length
+                  )
+                }
+                className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm transition-colors"
+                aria-label="Previous hero slide"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveHeroIndex(
+                    (currentIndex) => (currentIndex + 1) % heroSlides.length
+                  )
+                }
+                className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm transition-colors ml-auto"
+                aria-label="Next hero slide"
+              >
+                ›
+              </button>
             </div>
-            <div className="relative flex justify-center lg:justify-end">
-              <img
-                src="/done.png"
-                alt="Solar Panel"
-                className="w-78 sm:w-64 md:w-80 lg:w-full max-w-md "
-              />
+
+            <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${activeHeroIndex * 100}%)` }}>
+              {heroSlides.map((slide) => (
+                <div key={slide.title} className="min-w-full">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center px-4 sm:px-6 md:px-10 py-10 sm:py-12 md:py-16">
+                    <div className="text-white text-center lg:text-left">
+                      <p className="text-xs sm:text-sm mb-2 uppercase tracking-wide">
+                        {slide.eyebrow}
+                      </p>
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+                        {slide.title}
+                      </h1>
+                      <p className="text-base md:text-lg mb-6 md:mb-8 opacity-90 max-w-xl mx-auto lg:mx-0">
+                        {slide.description}
+                      </p>
+                      <Link to={slide.buttonLink}>
+                        <button className="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-sm sm:text-base">
+                          {slide.buttonText}
+                        </button>
+                      </Link>
+                    </div>
+                    <div className="relative flex justify-center lg:justify-end">
+                      <img
+                        src={slide.image}
+                        alt={slide.title}
+                        className="w-78 sm:w-64 md:w-80 lg:w-full max-w-md object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-center gap-2 pb-5 sm:pb-6">
+              {heroSlides.map((slide, index) => (
+                <button
+                  key={slide.title}
+                  type="button"
+                  onClick={() => setActiveHeroIndex(index)}
+                  className={`h-2.5 rounded-full transition-all ${
+                    index === activeHeroIndex
+                      ? 'w-8 bg-white'
+                      : 'w-2.5 bg-white/50'
+                  }`}
+                  aria-label={`Go to hero slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -214,7 +309,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+      <section className="max-w-7xl mx-auto px-4 py-6 md:py-8" data-reveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           <div className="bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden min-h-[200px]">
             <img
@@ -336,7 +431,7 @@ export default function HomePage() {
       </section>
 
       {/* Deal of the Day */}
-      <section className="max-w-7xl mx-auto px-4 py-10 md:py-16">
+      <section className="max-w-7xl mx-auto px-4 py-10 md:py-16" data-reveal>
         <div className="bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-2xl p-6 sm:p-8 md:p-12 text-white">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-center">
             <img
@@ -527,7 +622,7 @@ export default function HomePage() {
       </section>
 
       {/* Instagram Feed */}
-      <section className="max-w-7xl mx-auto px-4 py-10 md:py-16">
+      <section className="max-w-7xl mx-auto px-4 py-10 md:py-16" data-reveal>
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
             Follow on Instagram
@@ -556,3 +651,4 @@ export default function HomePage() {
     </div>
   )
 }
+

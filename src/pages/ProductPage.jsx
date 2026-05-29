@@ -263,7 +263,7 @@ export default function ProductPage() {
   )
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50" data-reveal>
       {/* Breadcrumb */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
@@ -271,7 +271,7 @@ export default function ProductPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8" data-reveal>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 md:gap-8">
           {/* Mobile Filter Toggle */}
           <button
@@ -372,3 +372,4 @@ export default function ProductPage() {
     </div>
   )
 }
+

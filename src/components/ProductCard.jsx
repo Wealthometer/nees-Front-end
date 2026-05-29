@@ -32,7 +32,10 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow group relative">
+    <div
+      className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow group relative"
+      data-reveal
+    >
       <button
         onClick={handleWishlistToggle}
         className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white rounded-full p-1.5 sm:p-2 shadow-md hover:bg-gray-50 transition-colors"

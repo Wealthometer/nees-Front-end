@@ -2,7 +2,7 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 
 export default function ContactPage() {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50" data-reveal>
       {/* Breadcrumb */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
@@ -10,7 +10,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-10 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-16" data-reveal>
         {/* Get in Touch */}
         <div className="text-center mb-8 md:mb-12">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 md:mb-12">
@@ -61,7 +61,7 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Form */}
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-auto" data-reveal>
           <div className="text-center mb-6 md:mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
               Drop us message
@@ -122,3 +122,4 @@ export default function ContactPage() {
     </div>
   )
 }
+

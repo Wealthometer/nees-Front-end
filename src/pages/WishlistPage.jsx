@@ -24,7 +24,7 @@ export default function WishlistPage() {
 
   if (wishlist.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-10 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-16" data-reveal>
         <div className="text-center">
           <Heart className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mx-auto text-gray-300 mb-4" />
           <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Your wishlist is empty</h2>
@@ -43,7 +43,7 @@ export default function WishlistPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8" data-reveal>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-8">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
           My Wishlist ({wishlist.length})
@@ -134,4 +134,5 @@ export default function WishlistPage() {
     </div>
   )
 }
+
 

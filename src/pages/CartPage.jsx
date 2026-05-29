@@ -36,7 +36,7 @@ export default function CartPage() {
   const subtotal = getCartTotal()
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50" data-reveal>
       {/* Breadcrumb */}
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
@@ -44,7 +44,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-12">
+      <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-12" data-reveal>
         {cartItems.length === 0 ? (
           <div className="text-center py-10 md:py-16">
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
@@ -279,5 +279,6 @@ export default function CartPage() {
     </div>
   )
 }
+
 
 
