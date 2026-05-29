@@ -116,7 +116,7 @@ export default function ProductPage() {
       <div className="mb-6 md:mb-8">
         <h3 className="font-semibold text-gray-900 mb-3 md:mb-4">Price</h3>
         <p className="text-sm text-gray-600 mb-4">
-          The highest price is ₦
+          The highest price is ?
           {Math.max(...products.map((p) => p.price), 0).toLocaleString()}
         </p>
         <div className="mb-4">
@@ -136,7 +136,7 @@ export default function ProductPage() {
         </div>
         <div className="flex gap-2">
           <div className="relative flex-1">
-            <span className="absolute left-2 top-1.5 text-gray-400 text-sm">₦</span>
+            <span className="absolute left-2 top-1.5 text-gray-400 text-sm">?</span>
             <input
               type="number"
               value={priceRange[0]}
@@ -152,7 +152,7 @@ export default function ProductPage() {
           </div>
           <span className="py-1 text-gray-400">-</span>
           <div className="relative flex-1">
-            <span className="absolute left-2 top-1.5 text-gray-400 text-sm">₦</span>
+            <span className="absolute left-2 top-1.5 text-gray-400 text-sm">?</span>
             <input
               type="number"
               value={priceRange[1]}

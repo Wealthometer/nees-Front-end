@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   const adminUrl =
@@ -6,17 +6,15 @@ export default function Footer() {
 
   return (
     <footer className="bg-white border-t mt-16">
-      {/* Brand logos */}
       <div className="bg-emerald-500 py-6 md:py-8 overflow-hidden relative">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex animate-slide whitespace-nowrap space-x-6 sm:space-x-8 md:space-x-12 text-white text-sm sm:text-base md:text-xl font-semibold opacity-90 tracking-wide">
+          <div className="flex whitespace-nowrap space-x-6 sm:space-x-8 md:space-x-12 text-white text-sm sm:text-base md:text-xl font-semibold opacity-90 tracking-wide">
             <span>Durability</span>
             <span>High Performance</span>
             <span>Energy Efficient</span>
             <span>Premium Quality</span>
             <span>Long Warranty</span>
             <span>Top Reliability</span>
-            {/* Repeat to make it seamless */}
             <span>Durability</span>
             <span>High Performance</span>
             <span>Energy Efficient</span>
@@ -27,25 +25,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes slide {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-slide {
-          display: inline-flex;
-          animation: slide 15s linear infinite;
-        }
-      `}</style>
-
-      {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
-          {/* Logo & Description */}
           <div className="col-span-2 sm:col-span-2 md:col-span-1">
             <img
               src="/Nee Solar Logo 1.png"
@@ -58,7 +39,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Help with */}
           <div>
             <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
               Help with
@@ -92,7 +72,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Information */}
           <div>
             <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
               Information
@@ -126,7 +105,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Top category */}
           <div>
             <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
               Top category
@@ -160,7 +138,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact info */}
           <div className="col-span-2 sm:col-span-1">
             <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
               Contact info
@@ -176,7 +153,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Newsletter */}
         <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <span className="font-semibold text-gray-900 text-sm md:text-base whitespace-nowrap">
@@ -195,7 +171,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t text-center text-gray-600 text-xs md:text-sm">
           <a target="_blank" rel="noreferrer" href={adminUrl}>
             {' '}

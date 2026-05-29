@@ -1,14 +1,26 @@
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || 'https://nees-1.onrender.com/api'
-const RENDER_BASE_URL =
-  import.meta.env.VITE_BASE_URL || 'https://nees-1.onrender.com'
+const isLocalHost =
+  typeof window !== 'undefined' &&
+  ['localhost', '127.0.0.1'].includes(window.location.hostname)
+
+const API_BASE_URL = isLocalHost
+  ? 'http://localhost:5000/api'
+  : import.meta.env.VITE_API_URL || 'https://nees-1.onrender.com/api'
+
+const RENDER_BASE_URL = isLocalHost
+  ? 'http://localhost:5000'
+  : import.meta.env.VITE_BASE_URL || 'https://nees-1.onrender.com'
+
 // Helper function to handle API responses
 const handleResponse = async (response) => {
   if (!response.ok) {
     const error = await response
+      .clone()
       .json()
-      .catch(() => ({ error: 'An error occurred' }))
-    throw new Error(error.error || 'An error occurred')
+      .catch(async () => {
+        const text = await response.clone().text().catch(() => '')
+        return { error: text || `Request failed with status ${response.status}` }
+      })
+    throw new Error(error.error || error.message || 'An error occurred')
   }
   return response.json()
 }
@@ -132,6 +144,26 @@ export const adminAPI = {
     return handleResponse(response)
   }
 }
+
+export const reviewsAPI = {
+  getAll: async () => {
+    const response = await fetch(`${API_BASE_URL}/reviews`)
+    return handleResponse(response)
+  },
+
+  create: async (reviewData) => {
+    const response = await fetch(`${API_BASE_URL}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(reviewData)
+    })
+    return handleResponse(response)
+  }
+}
+
+export const reviewsStreamUrl = `${API_BASE_URL}/reviews/stream`
 
 // Helper to get image URL
 export const getImageUrl = (imagePath) => {

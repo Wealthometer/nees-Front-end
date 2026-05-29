@@ -58,7 +58,7 @@ export default function ProductCard({ product }) {
           {product.name}
         </h3>
         <p className="text-emerald-600 font-semibold mb-2 sm:mb-3 text-sm md:text-base">
-          ₦{formatNaira(product.price)}
+          ?{formatNaira(product.price)}
         </p>
         <div className="flex items-center gap-0.5 sm:gap-1 mb-3 md:mb-4">
           {[...Array(5)].map((_, i) => (

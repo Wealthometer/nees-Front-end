@@ -1,14 +1,57 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import {
+  Star,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  MessageCircle
+} from 'lucide-react'
 import ProductCard from '../components/ProductCard'
-import { productsAPI } from '../services/api'
+import { productsAPI, reviewsAPI, reviewsStreamUrl } from '../services/api'
+
+const defaultReviews = [
+  {
+    id: 'default-1',
+    name: 'Chinelo Okafor',
+    image:
+      'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=150&h=150',
+    text: 'NEES made our switch to solar seamless. Their team was professional from consultation to installation, and the system has been performing reliably every day.',
+    rating: 5
+  },
+  {
+    id: 'default-2',
+    name: 'Tunde Adebayo',
+    image:
+      'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=150&h=150',
+    text: 'Excellent products and outstanding after-sales support. NEES delivered exactly what was promised, and our energy costs have reduced significantly.',
+    rating: 5
+  }
+]
+
+const normalizeReview = (review) => ({
+  ...review,
+  id: review.id ?? String(review._id ?? review.name),
+  text: review.comment ?? review.text ?? '',
+  image: review.avatarUrl || review.image || '',
+  rating: Number(review.rating) || 5
+})
+
+const getInitials = (name = '') =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join('')
 
 export default function HomePage() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [reviews, setReviews] = useState(defaultReviews)
+  const [activeReviewIndex, setActiveReviewIndex] = useState(0)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,6 +67,66 @@ export default function HomePage() {
 
     fetchProducts()
   }, [])
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchReviews = async () => {
+      try {
+        const data = await reviewsAPI.getAll()
+        if (isMounted && data?.length) {
+          setReviews(data.map(normalizeReview))
+        }
+      } catch (error) {
+        console.error('[v0] Error fetching reviews:', error)
+      }
+    }
+
+    fetchReviews()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  useEffect(() => {
+    const stream = new EventSource(reviewsStreamUrl)
+
+    const handleReviewCreated = (event) => {
+      const incomingReview = normalizeReview(JSON.parse(event.data))
+
+      setReviews((currentReviews) => {
+        if (currentReviews.some((review) => review.id === incomingReview.id)) {
+          return currentReviews
+        }
+
+        return [incomingReview, ...currentReviews]
+      })
+
+      setActiveReviewIndex(0)
+    }
+
+    stream.addEventListener('review-created', handleReviewCreated)
+
+    return () => {
+      stream.removeEventListener('review-created', handleReviewCreated)
+      stream.close()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (reviews.length < 2) return undefined
+
+    const intervalId = window.setInterval(() => {
+      setActiveReviewIndex(
+        (currentIndex) => (currentIndex + 1) % reviews.length
+      )
+    }, 5000)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [reviews.length])
 
   const trendingProducts = products.slice(0, 4)
 
@@ -285,64 +388,114 @@ export default function HomePage() {
             Our Customers Love Us
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {[
-            {
-              id: 1,
-              name: 'Chinelo Okafor',
-              image:
-                'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=150&h=150',
-              text: 'NEES made our switch to solar seamless. Their team was professional from consultation to installation, and the system has been performing reliably every day.'
-            },
-            {
-              id: 2,
-              name: 'Tunde Adebayo',
-              image:
-                'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=150&h=150',
-              text: 'Excellent products and outstanding after-sales support. NEES delivered exactly what was promised, and our energy costs have reduced significantly.'
-            }
-          ].map((review) => (
-            <div
-              key={review.id}
-              className="bg-white p-5 sm:p-6 md:p-8 rounded-lg border border-gray-200"
-            >
-              <div className="flex items-center gap-3 sm:gap-4 mb-4">
-                <img
-                  src={review.image}
-                  alt={review.name}
-                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover"
-                />
-                <div>
-                  <div className="flex gap-1 mb-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-green-400 text-green-400"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-sm text-gray-600">{review.name}</p>
-                </div>
+        <div className="min-w-0 max-w-full bg-white rounded-3xl border border-gray-200 shadow-sm p-5 sm:p-6 md:p-8">
+            <div className="flex items-center justify-between gap-4 mb-6">
+              <div>
+                <p className="text-emerald-500 text-sm font-medium mb-1">
+                  Live carousel
+                </p>
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900">
+                  Customer stories
+                </h3>
               </div>
-              <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                {review.text}
-              </p>
-              <div className="mt-4 flex items-center gap-2">
-                <span className="text-2xl text-emerald-500">¨</span>
-                <span className="font-semibold text-gray-900 text-sm md:text-base">
-                  Recommended
-                </span>
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                <MessageCircle className="w-4 h-4 text-emerald-500" />
+                {reviews.length} reviews
               </div>
             </div>
-          ))}
-        </div>
-        <div className="flex justify-center gap-4 mt-6 md:mt-8">
-          <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100">
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100">
-            <ChevronRight className="w-5 h-5" />
-          </button>
+
+            <div className="overflow-hidden min-w-0">
+              <div
+                className="flex transition-transform duration-700 ease-out"
+                style={{
+                  transform: `translateX(-${activeReviewIndex * 100}%)`
+                }}
+              >
+                {reviews.map((review) => (
+                  <div key={review.id} className="min-w-full">
+                    <div className="min-w-0 rounded-2xl bg-emerald-50 border border-emerald-100 p-5 sm:p-6 md:p-8 h-full">
+                      <div className="flex items-center gap-3 sm:gap-4 mb-5">
+                        {review.image ? (
+                          <img
+                            src={review.image}
+                            alt={review.name}
+                            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white shadow-sm"
+                          />
+                        ) : (
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">
+                            {getInitials(review.name)}
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <div className="flex gap-1 mb-1">
+                            {[...Array(review.rating || 5)].map((_, index) => (
+                              <Star
+                                key={index}
+                                className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-green-400 text-green-400"
+                              />
+                            ))}
+                          </div>
+                          <p className="text-sm text-gray-600 break-words">
+                            {review.name}
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="text-gray-700 leading-relaxed text-sm md:text-base break-words">
+                        {review.text}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveReviewIndex(
+                    (currentIndex) =>
+                      (currentIndex - 1 + reviews.length) % reviews.length
+                  )
+                }
+                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                disabled={reviews.length < 2}
+                aria-label="Previous review"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <div className="flex max-w-full flex-wrap items-center justify-center gap-2">
+                {reviews.map((review, index) => (
+                  <button
+                    key={review.id}
+                    type="button"
+                    onClick={() => setActiveReviewIndex(index)}
+                    className={`h-2.5 rounded-full transition-all ${
+                      index === activeReviewIndex
+                        ? 'w-8 bg-emerald-500'
+                        : 'w-2.5 bg-gray-300'
+                    }`}
+                    aria-label={`Go to review ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveReviewIndex(
+                    (currentIndex) => (currentIndex + 1) % reviews.length
+                  )
+                }
+                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                disabled={reviews.length < 2}
+                aria-label="Next review"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
         </div>
       </section>
 

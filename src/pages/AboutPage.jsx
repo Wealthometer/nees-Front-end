@@ -115,8 +115,8 @@ export default function AboutPage() {
             NEES Global Services stands as a beacon of hope in a world facing
             escalating energy demands and the urgent call to combat climate
             change. We are at the forefront of the solar revolution, offering
-            cutting-edge solar devicesâ€”from high-efficiency panels to smart fans
-            and air conditionersâ€”that are investments in a brighter, greener
+            cutting-edge solar devices—from high-efficiency panels to smart fans
+            and air conditioners—that are investments in a brighter, greener
             tomorrow. We are committed to empowering communities by making
             clean, affordable energy accessible to everyone.
           </p>
