@@ -10,7 +10,12 @@ import {
   MessageCircle
 } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
-import { productsAPI, reviewsAPI, reviewsStreamUrl } from '../services/api'
+import {
+  heroSlidesAPI,
+  productsAPI,
+  reviewsAPI,
+  reviewsStreamUrl
+} from '../services/api'
 
 const defaultReviews = [
   {
@@ -47,7 +52,21 @@ const getInitials = (name = '') =>
     .map((part) => part[0]?.toUpperCase())
     .join('')
 
-const heroSlides = [
+const getHeroImageUrl = (imagePath) => {
+  if (!imagePath) return '/done.png'
+  if (imagePath.startsWith('http')) return imagePath
+  if (imagePath.startsWith('/')) return imagePath
+  return `/done.png`
+}
+
+const getHeroBackgroundUrl = (imagePath) => {
+  if (!imagePath) return ''
+  if (imagePath.startsWith('http')) return imagePath
+  if (imagePath.startsWith('/')) return imagePath
+  return ''
+}
+
+const defaultHeroSlides = [
   {
     eyebrow: 'Welcome to Nees Solar',
     title: 'SMART ENERGY.',
@@ -83,6 +102,7 @@ export default function HomePage() {
   const [reviews, setReviews] = useState(defaultReviews)
   const [activeReviewIndex, setActiveReviewIndex] = useState(0)
   const [activeHeroIndex, setActiveHeroIndex] = useState(0)
+  const [heroSlides, setHeroSlides] = useState(defaultHeroSlides)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -97,6 +117,40 @@ export default function HomePage() {
     }
 
     fetchProducts()
+  }, [])
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchHeroSlides = async () => {
+      try {
+        const data = await heroSlidesAPI.getAll()
+        if (isMounted && data?.length) {
+            const normalizedSlides = data.map((slide) => ({
+              id: slide.id,
+              eyebrow: slide.eyebrow || 'Welcome to Nees Solar',
+              title: slide.title || 'SMART ENERGY.',
+              description:
+                slide.description ||
+                'Harness the power of the sun with our premium solar solutions',
+              buttonText: slide.buttonText || 'SHOP NOW',
+              buttonLink: slide.buttonLink || '/products',
+              image: slide.image || '/done.png',
+              backgroundImage: slide.backgroundImage || ''
+            }))
+          setHeroSlides(normalizedSlides)
+          setActiveHeroIndex(0)
+        }
+      } catch (error) {
+        console.error('[v0] Error fetching hero slides:', error)
+      }
+    }
+
+    fetchHeroSlides()
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   useEffect(() => {
@@ -169,7 +223,7 @@ export default function HomePage() {
     return () => {
       window.clearInterval(intervalId)
     }
-  }, [])
+  }, [heroSlides.length])
 
   const trendingProducts = products.slice(0, 4)
 
@@ -185,7 +239,19 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-emerald-400 to-emerald-500 relative overflow-hidden" data-reveal>
+        <section
+          className="relative overflow-hidden"
+          data-reveal
+          style={{
+            backgroundImage: heroSlides[activeHeroIndex]?.backgroundImage
+              ? `linear-gradient(rgba(5, 150, 105, 0.65), rgba(5, 150, 105, 0.65)), url(${getHeroBackgroundUrl(
+                  heroSlides[activeHeroIndex].backgroundImage
+                )})`
+              : 'linear-gradient(90deg, #34d399, #10b981)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
         <div className="max-w-7xl mx-auto px-4 py-10 sm:py-12 md:py-16">
           <div className="relative rounded-3xl bg-white/10 border border-white/20 overflow-hidden">
             <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 sm:px-4 md:px-6 pointer-events-none">
@@ -218,7 +284,7 @@ export default function HomePage() {
 
             <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${activeHeroIndex * 100}%)` }}>
               {heroSlides.map((slide) => (
-                <div key={slide.title} className="min-w-full">
+                <div key={slide.id || slide.title} className="min-w-full">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center px-4 sm:px-6 md:px-10 py-10 sm:py-12 md:py-16">
                     <div className="text-white text-center lg:text-left">
                       <p className="text-xs sm:text-sm mb-2 uppercase tracking-wide">
@@ -238,7 +304,7 @@ export default function HomePage() {
                     </div>
                     <div className="relative flex justify-center lg:justify-end">
                       <img
-                        src={slide.image}
+                        src={getHeroImageUrl(slide.image)}
                         alt={slide.title}
                         className="w-78 sm:w-64 md:w-80 lg:w-full max-w-md object-contain"
                       />
@@ -251,7 +317,7 @@ export default function HomePage() {
             <div className="flex items-center justify-center gap-2 pb-5 sm:pb-6">
               {heroSlides.map((slide, index) => (
                 <button
-                  key={slide.title}
+                  key={slide.id || slide.title}
                   type="button"
                   onClick={() => setActiveHeroIndex(index)}
                   className={`h-2.5 rounded-full transition-all ${
@@ -486,9 +552,9 @@ export default function HomePage() {
         <div className="min-w-0 max-w-full bg-white rounded-3xl border border-gray-200 shadow-sm p-5 sm:p-6 md:p-8">
             <div className="flex items-center justify-between gap-4 mb-6">
               <div>
-                <p className="text-emerald-500 text-sm font-medium mb-1">
+                {/* <p className="text-emerald-500 text-sm font-medium mb-1">
                   Live carousel
-                </p>
+                </p> */}
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                   Customer stories
                 </h3>
@@ -651,4 +717,3 @@ export default function HomePage() {
     </div>
   )
 }
-

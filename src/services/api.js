@@ -12,6 +12,13 @@ const RENDER_BASE_URL = isLocalHost
 
 // Helper function to handle API responses
 const handleResponse = async (response) => {
+  const contentType = response.headers.get('content-type') || ''
+
+  if (!contentType.includes('application/json')) {
+    const text = await response.text().catch(() => '')
+    throw new Error(text || 'Unexpected response format')
+  }
+
   if (!response.ok) {
     const error = await response
       .clone()
@@ -164,6 +171,18 @@ export const reviewsAPI = {
 }
 
 export const reviewsStreamUrl = `${API_BASE_URL}/reviews/stream`
+
+export const heroSlidesAPI = {
+  getAll: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/hero-slides`)
+      return await handleResponse(response)
+    } catch (error) {
+      console.error('[v0] Error fetching hero slides:', error)
+      return []
+    }
+  }
+}
 
 // Helper to get image URL
 export const getImageUrl = (imagePath) => {
