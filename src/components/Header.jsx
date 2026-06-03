@@ -44,7 +44,7 @@ export default function Header() {
               <img
                 src="/Nee Solar Logo 1.png"
                 alt="NEESSOLAR"
-                className="h-8 md:h-12"
+                className="h-14 md:h-20 lg:h-24 w-auto object-contain"
               />
             </Link>
 

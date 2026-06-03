@@ -221,7 +221,7 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section
-        className="relative overflow-hidden min-h-[55svh] md:min-h-[520px] bg-black"
+        className="relative overflow-hidden h-[75vh] md:h-[600px] bg-transparent"
         data-reveal
       >
         <div
@@ -231,7 +231,7 @@ export default function HomePage() {
           {heroSlides.map((slide) => (
             <div
               key={slide.id || slide.backgroundImage}
-              className="relative min-w-full h-[55svh] md:h-[520px]"
+              className="relative min-w-full h-[75vh] md:h-[600px]"
             >
               <Link
                 to="/products"
@@ -240,7 +240,7 @@ export default function HomePage() {
               />
               {slide.backgroundOnly ? (
                 <div
-                  className="absolute inset-0 bg-contain bg-center bg-no-repeat md:bg-cover"
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                   style={{
                     backgroundImage: slide.backgroundImage
                       ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
@@ -284,13 +284,13 @@ export default function HomePage() {
                           </Link>
                         ) : null}
                       </div>
-                      <div className="relative flex items-center justify-center lg:justify-end w-full h-full">
+                      <div className="relative flex items-center justify-center w-full h-full">
                         <img
                           src={getHeroImageUrl(
                             slide.image || slide.backgroundImage
                           )}
                           alt={slide.title || 'Hero slide'}
-                          className="w-full h-full object-contain"
+                          className="max-w-full max-h-full w-auto h-auto object-contain"
                         />
                       </div>
                     </div>
