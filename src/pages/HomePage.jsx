@@ -53,10 +53,10 @@ const getInitials = (name = '') =>
     .join('')
 
 const getHeroImageUrl = (imagePath) => {
-  if (!imagePath) return '/done.png'
+  if (!imagePath) return ''
   if (imagePath.startsWith('http')) return imagePath
   if (imagePath.startsWith('/')) return imagePath
-  return '/done.png'
+  return ''
 }
 
 const getHeroBackgroundUrl = (imagePath) => {
@@ -82,7 +82,7 @@ export default function HomePage() {
   const [reviews, setReviews] = useState(defaultReviews)
   const [activeReviewIndex, setActiveReviewIndex] = useState(0)
   const [activeHeroIndex, setActiveHeroIndex] = useState(0)
-  const [heroSlides, setHeroSlides] = useState(defaultHeroSlides)
+  const [heroSlides, setHeroSlides] = useState([])
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -105,23 +105,27 @@ export default function HomePage() {
     const fetchHeroSlides = async () => {
       try {
         const data = await heroSlidesAPI.getAll()
-        if (isMounted && data?.length) {
-          const normalizedSlides = data.map((slide) => ({
-            id: slide.id,
-            eyebrow: slide.eyebrow || '',
-            title: slide.title || '',
-            description: slide.description || '',
-            buttonText: slide.buttonText || '',
-            buttonLink: slide.buttonLink || '/products',
-            image: slide.image || '',
-            backgroundImage: slide.backgroundImage || slide.image || '',
-            backgroundOnly: Boolean(slide.backgroundOnly)
-          }))
-          setHeroSlides(normalizedSlides)
-          setActiveHeroIndex(0)
+        if (isMounted) {
+          if (data?.length) {
+            const normalizedSlides = data.map((slide) => ({
+              id: slide.id,
+              eyebrow: slide.eyebrow || '',
+              title: slide.title || '',
+              description: slide.description || '',
+              buttonText: slide.buttonText || '',
+              buttonLink: slide.buttonLink || '/products',
+              image: slide.image || '',
+              backgroundImage: slide.backgroundImage || slide.image || '',
+              backgroundOnly: Boolean(slide.backgroundOnly)
+            }))
+            setHeroSlides(normalizedSlides)
+          } else {
+            setHeroSlides(defaultHeroSlides)
+          }
         }
       } catch (error) {
         console.error('[v0] Error fetching hero slides:', error)
+        if (isMounted) setHeroSlides(defaultHeroSlides)
       }
     }
 
@@ -221,7 +225,7 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section
-        className="relative overflow-hidden h-[75vh] md:h-[600px] bg-transparent"
+        className="relative overflow-hidden h-[75svh] md:h-[600px] bg-white"
         data-reveal
       >
         <div
@@ -231,7 +235,7 @@ export default function HomePage() {
           {heroSlides.map((slide) => (
             <div
               key={slide.id || slide.backgroundImage}
-              className="relative min-w-full h-[75vh] md:h-[600px]"
+              className="relative min-w-full h-[75svh] md:h-[600px]"
             >
               <Link
                 to="/products"
@@ -240,7 +244,7 @@ export default function HomePage() {
               />
               {slide.backgroundOnly ? (
                 <div
-                  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                  className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat bg-white"
                   style={{
                     backgroundImage: slide.backgroundImage
                       ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
@@ -249,42 +253,41 @@ export default function HomePage() {
                 />
               ) : (
                 <div
-                  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                  className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat flex items-center justify-center bg-white"
                   style={{
                     backgroundImage: slide.backgroundImage
                       ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
                       : 'linear-gradient(90deg, #34d399, #10b981)'
                   }}
                 >
-                  <div className="absolute inset-0 bg-black/45" />
-                  <div className="relative z-20 h-full w-full px-4 sm:px-6 md:px-10">
-                    {' '}
-                    <div className="grid h-full grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
-                      <div className="text-white text-center lg:text-left">
-                        {slide.eyebrow ? (
+                  <div className="absolute inset-0 bg-black/45 hidden md:block" />
+                  <div className="relative z-20 h-full w-full px-4 sm:px-6 md:px-10 flex items-center justify-center">
+                    <div className="grid h-full w-full grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
+                      <div className="text-gray-900 md:text-white text-center lg:text-left flex flex-col items-center lg:items-start justify-center">
+                        {slide.eyebrow && (
                           <p className="text-xs sm:text-sm mb-2 uppercase tracking-wide">
                             {slide.eyebrow}
                           </p>
-                        ) : null}
-                        {slide.title ? (
+                        )}
+                        {slide.title && (
                           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                             {slide.title}
                           </h1>
-                        ) : null}
-                        {slide.description ? (
+                        )}
+                        {slide.description && (
                           <p className="text-base md:text-lg mb-6 md:mb-8 max-w-xl mx-auto lg:mx-0">
                             {slide.description}
                           </p>
-                        ) : null}
-                        {slide.buttonText ? (
+                        )}
+                        {slide.buttonText && (
                           <Link to={slide.buttonLink || '/products'}>
                             <button className="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-sm sm:text-base">
                               {slide.buttonText}
                             </button>
                           </Link>
-                        ) : null}
+                        )}
                       </div>
-                      <div className="relative flex items-center justify-center w-full h-full">
+                      <div className="hidden lg:flex relative items-center justify-center w-full h-full">
                         <img
                           src={getHeroImageUrl(
                             slide.image || slide.backgroundImage
