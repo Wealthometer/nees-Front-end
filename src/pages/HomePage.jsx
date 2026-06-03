@@ -56,7 +56,7 @@ const getHeroImageUrl = (imagePath) => {
   if (!imagePath) return '/done.png'
   if (imagePath.startsWith('http')) return imagePath
   if (imagePath.startsWith('/')) return imagePath
-  return `/done.png`
+  return '/done.png'
 }
 
 const getHeroBackgroundUrl = (imagePath) => {
@@ -67,32 +67,12 @@ const getHeroBackgroundUrl = (imagePath) => {
 }
 
 const defaultHeroSlides = [
+  { id: 'default-1', backgroundImage: '/done.png', backgroundOnly: true },
+  { id: 'default-2', backgroundImage: '/inverter.png', backgroundOnly: true },
   {
-    eyebrow: 'Welcome to Nees Solar',
-    title: 'SMART ENERGY.',
-    description:
-      'Harness the power of the sun with our premium solar solutions',
-    image: '/done.png',
-    buttonText: 'SHOP NOW',
-    buttonLink: '/products'
-  },
-  {
-    eyebrow: 'Clean Power Solutions',
-    title: 'POWER YOUR HOME.',
-    description:
-      'Reliable solar systems designed to keep your home and business running smoothly',
-    image: '/inverter.png',
-    buttonText: 'EXPLORE PRODUCTS',
-    buttonLink: '/products'
-  },
-  {
-    eyebrow: 'Trusted Energy Partner',
-    title: 'SAVE MORE DAILY.',
-    description:
-      'From installation to support, we help you reduce energy costs with confidence',
-    image: '/Productb.png',
-    buttonText: 'VIEW CATALOG',
-    buttonLink: '/products'
+    id: 'default-3',
+    backgroundImage: '/Productb.png',
+    backgroundOnly: true
   }
 ]
 
@@ -126,18 +106,17 @@ export default function HomePage() {
       try {
         const data = await heroSlidesAPI.getAll()
         if (isMounted && data?.length) {
-            const normalizedSlides = data.map((slide) => ({
-              id: slide.id,
-              eyebrow: slide.eyebrow || 'Welcome to Nees Solar',
-              title: slide.title || 'SMART ENERGY.',
-              description:
-                slide.description ||
-                'Harness the power of the sun with our premium solar solutions',
-              buttonText: slide.buttonText || 'SHOP NOW',
-              buttonLink: slide.buttonLink || '/products',
-              image: slide.image || '/done.png',
-              backgroundImage: slide.backgroundImage || ''
-            }))
+          const normalizedSlides = data.map((slide) => ({
+            id: slide.id,
+            eyebrow: slide.eyebrow || '',
+            title: slide.title || '',
+            description: slide.description || '',
+            buttonText: slide.buttonText || '',
+            buttonLink: slide.buttonLink || '/products',
+            image: slide.image || '',
+            backgroundImage: slide.backgroundImage || slide.image || '',
+            backgroundOnly: Boolean(slide.backgroundOnly)
+          }))
           setHeroSlides(normalizedSlides)
           setActiveHeroIndex(0)
         }
@@ -239,97 +218,124 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-        <section
-          className="relative overflow-hidden"
-          data-reveal
-          style={{
-            backgroundImage: heroSlides[activeHeroIndex]?.backgroundImage
-              ? `linear-gradient(rgba(5, 150, 105, 0.65), rgba(5, 150, 105, 0.65)), url(${getHeroBackgroundUrl(
-                  heroSlides[activeHeroIndex].backgroundImage
-                )})`
-              : 'linear-gradient(90deg, #34d399, #10b981)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
+      <section
+        className="relative overflow-hidden min-h-[55svh] md:min-h-[520px] bg-black"
+        data-reveal
+      >
+        <div
+          className="absolute inset-0 flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${activeHeroIndex * 100}%)` }}
         >
-        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-12 md:py-16">
-          <div className="relative rounded-3xl bg-white/10 border border-white/20 overflow-hidden">
-            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 sm:px-4 md:px-6 pointer-events-none">
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveHeroIndex(
-                    (currentIndex) =>
-                      (currentIndex - 1 + heroSlides.length) % heroSlides.length
-                  )
-                }
-                className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm transition-colors"
-                aria-label="Previous hero slide"
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveHeroIndex(
-                    (currentIndex) => (currentIndex + 1) % heroSlides.length
-                  )
-                }
-                className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm transition-colors ml-auto"
-                aria-label="Next hero slide"
-              >
-                ›
-              </button>
-            </div>
-
-            <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${activeHeroIndex * 100}%)` }}>
-              {heroSlides.map((slide) => (
-                <div key={slide.id || slide.title} className="min-w-full">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center px-4 sm:px-6 md:px-10 py-10 sm:py-12 md:py-16">
-                    <div className="text-white text-center lg:text-left">
-                      <p className="text-xs sm:text-sm mb-2 uppercase tracking-wide">
-                        {slide.eyebrow}
-                      </p>
-                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-                        {slide.title}
-                      </h1>
-                      <p className="text-base md:text-lg mb-6 md:mb-8 opacity-90 max-w-xl mx-auto lg:mx-0">
-                        {slide.description}
-                      </p>
-                      <Link to={slide.buttonLink}>
-                        <button className="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-sm sm:text-base">
-                          {slide.buttonText}
-                        </button>
-                      </Link>
-                    </div>
-                    <div className="relative flex justify-center lg:justify-end">
-                      <img
-                        src={getHeroImageUrl(slide.image)}
-                        alt={slide.title}
-                        className="w-78 sm:w-64 md:w-80 lg:w-full max-w-md object-contain"
-                      />
+          {heroSlides.map((slide) => (
+            <div
+              key={slide.id || slide.backgroundImage}
+              className="relative min-w-full h-[55svh] md:h-[520px]"
+            >
+              <Link
+                to="/products"
+                className="absolute inset-0 z-10"
+                aria-label="Shop products"
+              />
+              {slide.backgroundOnly ? (
+                <div
+                  className="absolute inset-0 bg-contain bg-center bg-no-repeat md:bg-cover"
+                  style={{
+                    backgroundImage: slide.backgroundImage
+                      ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
+                      : 'linear-gradient(90deg, #34d399, #10b981)'
+                  }}
+                />
+              ) : (
+                <div
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: slide.backgroundImage
+                      ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
+                      : 'linear-gradient(90deg, #34d399, #10b981)'
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/45" />
+                  <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+                    <div className="grid h-full grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
+                      <div className="text-white text-center lg:text-left">
+                        {slide.eyebrow ? (
+                          <p className="text-xs sm:text-sm mb-2 uppercase tracking-wide">
+                            {slide.eyebrow}
+                          </p>
+                        ) : null}
+                        {slide.title ? (
+                          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+                            {slide.title}
+                          </h1>
+                        ) : null}
+                        {slide.description ? (
+                          <p className="text-base md:text-lg mb-6 md:mb-8 max-w-xl mx-auto lg:mx-0">
+                            {slide.description}
+                          </p>
+                        ) : null}
+                        {slide.buttonText ? (
+                          <Link to={slide.buttonLink || '/products'}>
+                            <button className="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-sm sm:text-base">
+                              {slide.buttonText}
+                            </button>
+                          </Link>
+                        ) : null}
+                      </div>
+                      <div className="relative flex justify-center lg:justify-end">
+                        <img
+                          src={getHeroImageUrl(slide.image || slide.backgroundImage)}
+                          alt={slide.title || 'Hero slide'}
+                          className="w-78 sm:w-64 md:w-80 lg:w-full max-w-md object-contain"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
+          ))}
+        </div>
 
-            <div className="flex items-center justify-center gap-2 pb-5 sm:pb-6">
-              {heroSlides.map((slide, index) => (
-                <button
-                  key={slide.id || slide.title}
-                  type="button"
-                  onClick={() => setActiveHeroIndex(index)}
-                  className={`h-2.5 rounded-full transition-all ${
-                    index === activeHeroIndex
-                      ? 'w-8 bg-white'
-                      : 'w-2.5 bg-white/50'
-                  }`}
-                  aria-label={`Go to hero slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 sm:px-4 md:px-6 pointer-events-none">
+          <button
+            type="button"
+            onClick={() =>
+              setActiveHeroIndex(
+                (currentIndex) =>
+                  (currentIndex - 1 + heroSlides.length) % heroSlides.length
+              )
+            }
+            className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white text-emerald-700 hover:bg-gray-100 transition-colors"
+            aria-label="Previous hero slide"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              setActiveHeroIndex(
+                (currentIndex) => (currentIndex + 1) % heroSlides.length
+              )
+            }
+            className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white text-emerald-700 hover:bg-gray-100 transition-colors ml-auto"
+            aria-label="Next hero slide"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="absolute bottom-4 sm:bottom-5 left-0 right-0 flex items-center justify-center gap-2">
+          {heroSlides.map((slide, index) => (
+            <button
+              key={slide.id || slide.backgroundImage || index}
+              type="button"
+              onClick={() => setActiveHeroIndex(index)}
+              className={`h-2.5 rounded-full transition-all ${
+                index === activeHeroIndex ? 'w-8 bg-white' : 'w-2.5 bg-gray-300'
+              }`}
+              aria-label={`Go to hero slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 

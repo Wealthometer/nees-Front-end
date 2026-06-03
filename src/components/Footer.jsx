@@ -104,7 +104,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
           <div>
             <h3 className="font-semibold text-gray-900 mb-3 md:mb-4 text-sm md:text-base">
               Top category

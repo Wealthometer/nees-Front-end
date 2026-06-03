@@ -92,12 +92,12 @@ export default function ProductDetailPage() {
       productImages[selectedImage] || '/placeholder.svg'
 
     // Construct the message for WhatsApp
-    const message =
+      const message =
       `Hello, I'm interested in purchasing the following product:\n\n` +
       `Product Name: ${product.name}\n` +
       `Quantity: ${quantity}\n` +
-      `Price per item: ?${formatNaira(product.price)}\n` +
-      `Total Price: ?${formatNaira(Number(product.price) * quantity)}\n\n` +
+      `Price per item: ${formatNaira(product.price)}\n` +
+      `Total Price: ${formatNaira(Number(product.price) * quantity)}\n\n` +
       `Product Image: ${currentProductImageUrl}\n` +
       `Product Page: ${window.location.href}`
 
@@ -173,7 +173,7 @@ export default function ProductDetailPage() {
 
             <div className="flex items-center gap-4 mb-4 md:mb-6">
               <span className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
-                ?{formatNaira(product.price)}
+                {formatNaira(product.price)}
               </span>
             </div>
 
