@@ -196,7 +196,9 @@ export default function HomePage() {
     if (heroSlides.length < 2) return undefined
 
     const intervalId = window.setInterval(() => {
-      setActiveHeroIndex((currentIndex) => (currentIndex + 1) % heroSlides.length)
+      setActiveHeroIndex(
+        (currentIndex) => (currentIndex + 1) % heroSlides.length
+      )
     }, 5000)
 
     return () => {
@@ -255,7 +257,8 @@ export default function HomePage() {
                   }}
                 >
                   <div className="absolute inset-0 bg-black/45" />
-                  <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+                  <div className="relative z-20 h-full w-full px-4 sm:px-6 md:px-10">
+                    {' '}
                     <div className="grid h-full grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
                       <div className="text-white text-center lg:text-left">
                         {slide.eyebrow ? (
@@ -281,11 +284,13 @@ export default function HomePage() {
                           </Link>
                         ) : null}
                       </div>
-                      <div className="relative flex justify-center lg:justify-end">
+                      <div className="relative flex items-center justify-center lg:justify-end w-full h-full">
                         <img
-                          src={getHeroImageUrl(slide.image || slide.backgroundImage)}
+                          src={getHeroImageUrl(
+                            slide.image || slide.backgroundImage
+                          )}
                           alt={slide.title || 'Hero slide'}
-                          className="w-78 sm:w-64 md:w-80 lg:w-full max-w-md object-contain"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                     </div>
@@ -556,113 +561,113 @@ export default function HomePage() {
           </h2>
         </div>
         <div className="min-w-0 max-w-full bg-white rounded-3xl border border-gray-200 shadow-sm p-5 sm:p-6 md:p-8">
-            <div className="flex items-center justify-between gap-4 mb-6">
-              <div>
-                {/* <p className="text-emerald-500 text-sm font-medium mb-1">
+          <div className="flex items-center justify-between gap-4 mb-6">
+            <div>
+              {/* <p className="text-emerald-500 text-sm font-medium mb-1">
                   Live carousel
                 </p> */}
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900">
-                  Customer stories
-                </h3>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <MessageCircle className="w-4 h-4 text-emerald-500" />
-                {reviews.length} reviews
-              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900">
+                Customer stories
+              </h3>
             </div>
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <MessageCircle className="w-4 h-4 text-emerald-500" />
+              {reviews.length} reviews
+            </div>
+          </div>
 
-            <div className="overflow-hidden min-w-0">
-              <div
-                className="flex transition-transform duration-700 ease-out"
-                style={{
-                  transform: `translateX(-${activeReviewIndex * 100}%)`
-                }}
-              >
-                {reviews.map((review) => (
-                  <div key={review.id} className="min-w-full">
-                    <div className="min-w-0 rounded-2xl bg-emerald-50 border border-emerald-100 p-5 sm:p-6 md:p-8 h-full">
-                      <div className="flex items-center gap-3 sm:gap-4 mb-5">
-                        {review.image ? (
-                          <img
-                            src={review.image}
-                            alt={review.name}
-                            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white shadow-sm"
-                          />
-                        ) : (
-                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">
-                            {getInitials(review.name)}
-                          </div>
-                        )}
-                        <div className="min-w-0">
-                          <div className="flex gap-1 mb-1">
-                            {[...Array(review.rating || 5)].map((_, index) => (
-                              <Star
-                                key={index}
-                                className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-green-400 text-green-400"
-                              />
-                            ))}
-                          </div>
-                          <p className="text-sm text-gray-600 break-words">
-                            {review.name}
-                          </p>
+          <div className="overflow-hidden min-w-0">
+            <div
+              className="flex transition-transform duration-700 ease-out"
+              style={{
+                transform: `translateX(-${activeReviewIndex * 100}%)`
+              }}
+            >
+              {reviews.map((review) => (
+                <div key={review.id} className="min-w-full">
+                  <div className="min-w-0 rounded-2xl bg-emerald-50 border border-emerald-100 p-5 sm:p-6 md:p-8 h-full">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-5">
+                      {review.image ? (
+                        <img
+                          src={review.image}
+                          alt={review.name}
+                          className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white shadow-sm"
+                        />
+                      ) : (
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">
+                          {getInitials(review.name)}
                         </div>
+                      )}
+                      <div className="min-w-0">
+                        <div className="flex gap-1 mb-1">
+                          {[...Array(review.rating || 5)].map((_, index) => (
+                            <Star
+                              key={index}
+                              className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-green-400 text-green-400"
+                            />
+                          ))}
+                        </div>
+                        <p className="text-sm text-gray-600 break-words">
+                          {review.name}
+                        </p>
                       </div>
-
-                      <p className="text-gray-700 leading-relaxed text-sm md:text-base break-words">
-                        {review.text}
-                      </p>
                     </div>
+
+                    <p className="text-gray-700 leading-relaxed text-sm md:text-base break-words">
+                      {review.text}
+                    </p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
+            <button
+              type="button"
+              onClick={() =>
+                setActiveReviewIndex(
+                  (currentIndex) =>
+                    (currentIndex - 1 + reviews.length) % reviews.length
+                )
+              }
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled={reviews.length < 2}
+              aria-label="Previous review"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            <div className="flex max-w-full flex-wrap items-center justify-center gap-2">
+              {reviews.map((review, index) => (
+                <button
+                  key={review.id}
+                  type="button"
+                  onClick={() => setActiveReviewIndex(index)}
+                  className={`h-2.5 rounded-full transition-all ${
+                    index === activeReviewIndex
+                      ? 'w-8 bg-emerald-500'
+                      : 'w-2.5 bg-gray-300'
+                  }`}
+                  aria-label={`Go to review ${index + 1}`}
+                />
+              ))}
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveReviewIndex(
-                    (currentIndex) =>
-                      (currentIndex - 1 + reviews.length) % reviews.length
-                  )
-                }
-                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
-                disabled={reviews.length < 2}
-                aria-label="Previous review"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-
-              <div className="flex max-w-full flex-wrap items-center justify-center gap-2">
-                {reviews.map((review, index) => (
-                  <button
-                    key={review.id}
-                    type="button"
-                    onClick={() => setActiveReviewIndex(index)}
-                    className={`h-2.5 rounded-full transition-all ${
-                      index === activeReviewIndex
-                        ? 'w-8 bg-emerald-500'
-                        : 'w-2.5 bg-gray-300'
-                    }`}
-                    aria-label={`Go to review ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveReviewIndex(
-                    (currentIndex) => (currentIndex + 1) % reviews.length
-                  )
-                }
-                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
-                disabled={reviews.length < 2}
-                aria-label="Next review"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() =>
+                setActiveReviewIndex(
+                  (currentIndex) => (currentIndex + 1) % reviews.length
+                )
+              }
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled={reviews.length < 2}
+              aria-label="Next review"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </section>
 

@@ -110,7 +110,7 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="bg-gray-50" data-reveal>
+    <div className="bg-gray-50" >
       <div className="bg-gray-800 text-white py-4">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-xs sm:text-sm truncate">
@@ -119,8 +119,8 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-12" data-reveal>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-10 md:mb-16" data-reveal>
+      <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-12" >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-10 md:mb-16" >
           <div>
             <div className="bg-white rounded-lg p-4 md:p-8 mb-3 md:mb-4">
               <img
