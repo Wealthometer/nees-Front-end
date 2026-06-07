@@ -52,13 +52,6 @@ const getInitials = (name = '') =>
     .map((part) => part[0]?.toUpperCase())
     .join('')
 
-const getHeroImageUrl = (imagePath) => {
-  if (!imagePath) return ''
-  if (imagePath.startsWith('http')) return imagePath
-  if (imagePath.startsWith('/')) return imagePath
-  return ''
-}
-
 const getHeroBackgroundUrl = (imagePath) => {
   if (!imagePath) return ''
   if (imagePath.startsWith('http')) return imagePath
@@ -82,7 +75,7 @@ export default function HomePage() {
   const [reviews, setReviews] = useState(defaultReviews)
   const [activeReviewIndex, setActiveReviewIndex] = useState(0)
   const [activeHeroIndex, setActiveHeroIndex] = useState(0)
-  const [heroSlides, setHeroSlides] = useState([])
+  const [heroSlides, setHeroSlides] = useState(defaultHeroSlides)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -109,14 +102,7 @@ export default function HomePage() {
           if (data?.length) {
             const normalizedSlides = data.map((slide) => ({
               id: slide.id,
-              eyebrow: slide.eyebrow || '',
-              title: slide.title || '',
-              description: slide.description || '',
-              buttonText: slide.buttonText || '',
-              buttonLink: slide.buttonLink || '/products',
-              image: slide.image || '',
-              backgroundImage: slide.backgroundImage || slide.image || '',
-              backgroundOnly: Boolean(slide.backgroundOnly)
+              backgroundImage: slide.backgroundImage || slide.image || ''
             }))
             setHeroSlides(normalizedSlides)
           } else {
@@ -225,7 +211,7 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section
-        className="relative overflow-hidden h-[75svh] md:h-[600px] bg-white"
+        className="relative overflow-hidden h-[26svh] md:h-screen bg-black"
         data-reveal
       >
         <div
@@ -235,71 +221,21 @@ export default function HomePage() {
           {heroSlides.map((slide) => (
             <div
               key={slide.id || slide.backgroundImage}
-              className="relative min-w-full h-[75svh] md:h-[600px]"
+              className="relative min-w-full h-[26svh] md:h-screen"
             >
               <Link
                 to="/products"
                 className="absolute inset-0 z-10"
                 aria-label="Shop products"
               />
-              {slide.backgroundOnly ? (
-                <div
-                  className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat bg-white"
-                  style={{
-                    backgroundImage: slide.backgroundImage
-                      ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
-                      : 'linear-gradient(90deg, #34d399, #10b981)'
-                  }}
-                />
-              ) : (
-                <div
-                  className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat flex items-center justify-center bg-white"
-                  style={{
-                    backgroundImage: slide.backgroundImage
-                      ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
-                      : 'linear-gradient(90deg, #34d399, #10b981)'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-black/45 hidden md:block" />
-                  <div className="relative z-20 h-full w-full px-4 sm:px-6 md:px-10 flex items-center justify-center">
-                    <div className="grid h-full w-full grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
-                      <div className="text-gray-900 md:text-white text-center lg:text-left flex flex-col items-center lg:items-start justify-center">
-                        {slide.eyebrow && (
-                          <p className="text-xs sm:text-sm mb-2 uppercase tracking-wide">
-                            {slide.eyebrow}
-                          </p>
-                        )}
-                        {slide.title && (
-                          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-                            {slide.title}
-                          </h1>
-                        )}
-                        {slide.description && (
-                          <p className="text-base md:text-lg mb-6 md:mb-8 max-w-xl mx-auto lg:mx-0">
-                            {slide.description}
-                          </p>
-                        )}
-                        {slide.buttonText && (
-                          <Link to={slide.buttonLink || '/products'}>
-                            <button className="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-sm sm:text-base">
-                              {slide.buttonText}
-                            </button>
-                          </Link>
-                        )}
-                      </div>
-                      <div className="hidden lg:flex relative items-center justify-center w-full h-full">
-                        <img
-                          src={getHeroImageUrl(
-                            slide.image || slide.backgroundImage
-                          )}
-                          alt={slide.title || 'Hero slide'}
-                          className="max-w-full max-h-full w-auto h-auto object-contain"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <div
+                className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat bg-black"
+                style={{
+                  backgroundImage: slide.backgroundImage
+                    ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
+                    : 'linear-gradient(90deg, #34d399, #10b981)'
+                }}
+              />
             </div>
           ))}
         </div>
