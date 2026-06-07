@@ -105,13 +105,18 @@ export default function HomePage() {
               backgroundImage: slide.backgroundImage || slide.image || ''
             }))
             setHeroSlides(normalizedSlides)
+            setActiveHeroIndex(0)
           } else {
             setHeroSlides(defaultHeroSlides)
+            setActiveHeroIndex(0)
           }
         }
       } catch (error) {
         console.error('[v0] Error fetching hero slides:', error)
-        if (isMounted) setHeroSlides(defaultHeroSlides)
+        if (isMounted) {
+          setHeroSlides(defaultHeroSlides)
+          setActiveHeroIndex(0)
+        }
       }
     }
 
