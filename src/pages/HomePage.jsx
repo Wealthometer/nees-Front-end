@@ -59,23 +59,13 @@ const getHeroBackgroundUrl = (imagePath) => {
   return ''
 }
 
-const defaultHeroSlides = [
-  { id: 'default-1', backgroundImage: '/done.png', backgroundOnly: true },
-  { id: 'default-2', backgroundImage: '/inverter.png', backgroundOnly: true },
-  {
-    id: 'default-3',
-    backgroundImage: '/Productb.png',
-    backgroundOnly: true
-  }
-]
-
 export default function HomePage() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [reviews, setReviews] = useState(defaultReviews)
   const [activeReviewIndex, setActiveReviewIndex] = useState(0)
   const [activeHeroIndex, setActiveHeroIndex] = useState(0)
-  const [heroSlides, setHeroSlides] = useState(defaultHeroSlides)
+  const [heroSlides, setHeroSlides] = useState([])
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -107,14 +97,14 @@ export default function HomePage() {
             setHeroSlides(normalizedSlides)
             setActiveHeroIndex(0)
           } else {
-            setHeroSlides(defaultHeroSlides)
+            setHeroSlides([])
             setActiveHeroIndex(0)
           }
         }
       } catch (error) {
         console.error('[v0] Error fetching hero slides:', error)
         if (isMounted) {
-          setHeroSlides(defaultHeroSlides)
+          setHeroSlides([])
           setActiveHeroIndex(0)
         }
       }
@@ -219,73 +209,79 @@ export default function HomePage() {
         className="relative overflow-hidden h-[26svh] md:h-screen bg-black"
         data-reveal
       >
-        <div
-          className="absolute inset-0 flex transition-transform duration-700 ease-in-out"
-          style={{ transform: `translateX(-${activeHeroIndex * 100}%)` }}
-        >
-          {heroSlides.map((slide) => (
+        {heroSlides.length > 0 ? (
+          <>
             <div
-              key={slide.id || slide.backgroundImage}
-              className="relative min-w-full h-[26svh] md:h-screen"
+              className="absolute inset-0 flex transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${activeHeroIndex * 100}%)` }}
             >
-              <Link
-                to="/products"
-                className="absolute inset-0 z-10"
-                aria-label="Shop products"
-              />
-              <div
-                className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat bg-black"
-                style={{
-                  backgroundImage: slide.backgroundImage
-                    ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
-                    : 'linear-gradient(90deg, #34d399, #10b981)'
-                }}
-              />
+              {heroSlides.map((slide) => (
+                <div
+                  key={slide.id || slide.backgroundImage}
+                  className="relative min-w-full h-[26svh] md:h-screen"
+                >
+                  <Link
+                    to="/products"
+                    className="absolute inset-0 z-10"
+                    aria-label="Shop products"
+                  />
+                  <div
+                    className="absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat bg-black"
+                    style={{
+                      backgroundImage: slide.backgroundImage
+                        ? `url(${getHeroBackgroundUrl(slide.backgroundImage)})`
+                        : 'none'
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 sm:px-4 md:px-6 pointer-events-none">
-          <button
-            type="button"
-            onClick={() =>
-              setActiveHeroIndex(
-                (currentIndex) =>
-                  (currentIndex - 1 + heroSlides.length) % heroSlides.length
-              )
-            }
-            className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white text-emerald-700 hover:bg-gray-100 transition-colors"
-            aria-label="Previous hero slide"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              setActiveHeroIndex(
-                (currentIndex) => (currentIndex + 1) % heroSlides.length
-              )
-            }
-            className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white text-emerald-700 hover:bg-gray-100 transition-colors ml-auto"
-            aria-label="Next hero slide"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
+            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 sm:px-4 md:px-6 pointer-events-none">
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveHeroIndex(
+                    (currentIndex) =>
+                      (currentIndex - 1 + heroSlides.length) % heroSlides.length
+                  )
+                }
+                className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white text-emerald-700 hover:bg-gray-100 transition-colors"
+                aria-label="Previous hero slide"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveHeroIndex(
+                    (currentIndex) => (currentIndex + 1) % heroSlides.length
+                  )
+                }
+                className="pointer-events-auto hidden sm:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white text-emerald-700 hover:bg-gray-100 transition-colors ml-auto"
+                aria-label="Next hero slide"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
 
-        <div className="absolute bottom-4 sm:bottom-5 left-0 right-0 flex items-center justify-center gap-2">
-          {heroSlides.map((slide, index) => (
-            <button
-              key={slide.id || slide.backgroundImage || index}
-              type="button"
-              onClick={() => setActiveHeroIndex(index)}
-              className={`h-2.5 rounded-full transition-all ${
-                index === activeHeroIndex ? 'w-8 bg-white' : 'w-2.5 bg-gray-300'
-              }`}
-              aria-label={`Go to hero slide ${index + 1}`}
-            />
-          ))}
-        </div>
+            <div className="absolute bottom-4 sm:bottom-5 left-0 right-0 flex items-center justify-center gap-2">
+              {heroSlides.map((slide, index) => (
+                <button
+                  key={slide.id || slide.backgroundImage || index}
+                  type="button"
+                  onClick={() => setActiveHeroIndex(index)}
+                  className={`h-2.5 rounded-full transition-all ${
+                    index === activeHeroIndex
+                      ? 'w-8 bg-white'
+                      : 'w-2.5 bg-gray-300'
+                  }`}
+                  aria-label={`Go to hero slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        ) : null}
       </section>
 
       {/* Popular Categories */}
