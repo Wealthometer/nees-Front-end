@@ -18,7 +18,7 @@ export default function Header() {
       <div className="bg-gray-100 py-2 px-4 text-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
           <div className="text-gray-600 text-xs md:text-sm">
-            Email: neesglobalservice@gmail.com
+            Email: neessolarsunrisenig@gmail.com
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
             {/* <span className="text-gray-600 text-xs md:text-sm text-center">
